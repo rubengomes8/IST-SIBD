@@ -74,14 +74,17 @@ order by count(m.name);
 6. Present the average number of assistants, procedures, diagnostic codes,
 and prescriptions involved in consults from the year of 2017.
 
-select avg(count(assistant.VAT)), avg(count(procedure.KEYDISTO)), avg(count(diagnosis_code.code)), avg(count(prescription.KEYDISTO))
-from assistant a, procedure p, consult c, consult_diagnosis cd, diagnosis_code dc, prescription pres
-where a.VAT = p.VAT and
-p.name = c.name and p.VAT_owner = c.VAT_owner and p.date_timestamp = c.date_timestamp and
-cd.name = c.name and cd.VAT_owner = c.VAT_owner and cd.date_timestamp = c.date_timestamp and
-cd.code = dc.code and
-cd.name = pres.name and cd.VAT_owner = pres.VAT_owner and cd.date_timestamp = pres.date_timestamp
-where year(c.date_timestamp) > 2016;
+select avg(count(a.VAT)),
+       avg(count(distinct(p.name,p.VAT_owner, p.date_timestamp))),
+       avg(count(dc.code)),
+       avg(count(pres.code,pres.name,pres.VAT_owner,pres.date_timestamp,pres.name_med,pres.lab,pres.dosage))
+        from assistant a, procedure_ p, consult c, consult_diagnosis cd, diagnosis_code dc, prescription pres
+        where a.VAT = p.VAT 
+        and p.name = c.name and p.VAT_owner = c.VAT_owner and p.date_timestamp = c.date_timestamp and
+        cd.name = c.name and cd.VAT_owner = c.VAT_owner and cd.date_timestamp = c.date_timestamp and
+        cd.code = dc.code and
+        cd.name = pres.name and cd.VAT_owner = pres.VAT_owner and cd.date_timestamp = pres.date_timestamp
+        and year(c.date_timestamp) = 2017;
 
 
 
@@ -91,42 +94,49 @@ code for consults involving animals of that species).
 
 
 select dc.name from diagnosis_code as dc, consult_diagnosis as cd, consult as c, animal as a
-where dc.code = cd.code and
+    where dc.code = cd.code and
 	cd.name = c.name and cd.VAT_owner = c.VAT_owner and cd.date_timestamp = c.date_timestamp and
 	c.name = a.name and c.VAT_owner = a.VAT_owner 
-	and a.species_name = 'dog' and dc.code in(
-		select code, count(code) from diagnosis_code 
-		group by code having count(code) = max(count(code)));
+	and a.species_name = 'dog' 
+    and dc.code in(
+		select code, count(code) from diagnosis_code
+        group by code 
+        having count(code) = max(count(code))
+    );
 		
 (Esta filtragem do ter o max count(code) deve estar mal)
 
 
 
 
-8. List the names of individuals that are simultaneously clients of the
+8.(CORRECT) List the names of individuals that are simultaneously clients of the
 hospital (i.e., owners of animals or clients that have brought animals
 to consults) and employees of the hospital (i.e., veterinary doctors or
 assistants).
 
-select client.name from client where client.VAT in 
-	(select veterinary.VAT from veterinary union select assistant.VAT from assistant)
+select person.name from person natural join client
+    where client.VAT in 
+	    (select veterinary.VAT from veterinary union select assistant.VAT from assistant);
 	
 
 	
 	
-9. List the names and addresses of clients that only own birds as their
+9.(CORRECT-mas não sei porque) List the names and addresses of clients that only own birds as their
 pets (i.e., the clients for whom all the owned animals contain the
 word bird as part of the species name).
 
-select distinct client.name, client.address_street, client.address_city, client.address_zip 
-from client as c 
-where not exists(
-	select animal.name, animal.VAT from animal 
-	where animal.species_name like '%bird%'
-	and animal.name,animal.VAT not in(
-		select animal.name, animal.VAT from animal as a2, client as c2
-		where a2.VAT = c2.VAT
-		and c2.VAT = c.VAT));
+select distinct p.name, p.address_street, p.address_city, p.address_zip from client c natural join person p
+where exists(
+    select animal.name, animal.VAT from animal 
+        where animal.species_name like '%bird%'
+        and animal.VAT = c.VAT
+        and not exists(
+            select a2.name, a2.VAT from animal a2, client c2
+                    where a2.species_name not like '%bird%'
+                    and a2.VAT = c2.VAT
+                    and a2.VAT = animal.VAT
+            )
+    );
 
 
 
