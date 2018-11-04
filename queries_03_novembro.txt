@@ -44,7 +44,7 @@ select animal.name, person.name, species_name, age from animal inner join client
                 group by c1.name, c1.VAT_owner
                 having c1.weight > 30)
     and exists(
-        select consult.name, consult.VAT_owner from consult consult
+        select consult.name, consult.VAT_owner from consult
             where consult.o like '%obese%' or consult.o like '%obesity%'
             and consult.name = animal.name
             and consult.VAT_owner = animal.VAT)
@@ -54,23 +54,21 @@ select animal.name, person.name, species_name, age from animal inner join client
 convem adicionar uma consulta recente com peso > 30 mas sem obesidades
 
 
-4. List the name, VAT and address of all clients of the hospital that are not owners of animals
+4.(CORRECT) List the name, VAT and address of all clients of the hospital that are not owners of animals
 
 select person.name, person.VAT, person.address_street, person.address_city, person.address_zip from person
 where person.VAT not in (select animal.VAT from animal);
 
-5. For each possible diagnosis, list the number of distinct medication
+5. (CORRECT) For each possible diagnosis, list the number of distinct medication
 names that have been prescribed to treat that condition. Sort the
 results according to the number of distinct medication names, in
 ascending order.
 
-select count(medication.name), diagnosis_code.code from medication m, diagnosis_code dc, prescription p
+select count(distinct m.name), dc.code from medication m, diagnosis_code dc, prescription p
 where m.name = p.name_med and m.lab = p.lab and m.dosage = p.dosage and
 p.code = dc.code
-group by diagnosis_code.code
-order by count(medication.name);
-
-
+group by dc.code
+order by count(m.name);
 
 
 6. Present the average number of assistants, procedures, diagnostic codes,
