@@ -1,0 +1,137 @@
+1.(CORRECT) List the name, owner name, species, and age, for all animals that
+participated in consults with a veterinary doctor named John Smith.
+
+
+select animal.name, person.name,person.VAT, species_name, age from animal inner join client inner join person
+    where exists( 
+        select consult.name,consult.VAT_owner from consult
+        where consult.VAT_vet in(
+            select VAT from person natural join veterinary 
+            where person.name = 'John Smith')
+        and consult.name = animal.name
+        and consult.VAT_owner = animal.VAT)
+    and animal.VAT = client.VAT
+    and client.VAT=person.VAT;
+
+
+não se pode fazer natural join a estas tabelas porque os nomes, VATs estão todos misturados e têm valores diferentes entre tabelas!
+
+
+
+2.(CORRECT) List the name of all indicators measured in milligrams and with a
+reference value above 100. The names should be presented together
+with the corresponding reference value, and sorted according to the
+reference value, in descending order
+
+select name, reference_value from indicator 
+    where units = 'milligrams' 
+    and reference_value > 100
+        order by reference_value desc;
+
+
+
+
+3.(CORRECT)List the name, owner name, species and age for all animals with the
+most recent weight above 30 kilograms, and where the objective part
+of any SOAP note, associated to consults of that animal, mentions
+terms like obesity or obese.
+
+select animal.name, person.name, species_name, age from animal inner join client inner join person
+    where exists(
+            select c1.name, c1.VAT_owner, c1.weight, MAX(c1.date_timestamp) from consult c1
+                where c1.name = animal.name
+                and c1.VAT_owner = animal.VAT
+                group by c1.name, c1.VAT_owner
+                having c1.weight > 30)
+    and exists(
+        select consult.name, consult.VAT_owner from consult consult
+            where consult.o like '%obese%' or consult.o like '%obesity%'
+            and consult.name = animal.name
+            and consult.VAT_owner = animal.VAT)
+    and animal.VAT = client.VAT
+    and client.VAT=person.VAT;
+	
+convem adicionar uma consulta recente com peso > 30 mas sem obesidades
+
+
+4. List the name, VAT and address of all clients of the hospital that are not owners of animals
+
+select person.name, person.VAT, person.address_street, person.address_city, person.address_zip from person
+where person.VAT not in (select animal.VAT from animal);
+
+5. For each possible diagnosis, list the number of distinct medication
+names that have been prescribed to treat that condition. Sort the
+results according to the number of distinct medication names, in
+ascending order.
+
+select count(medication.name), diagnosis_code.code from medication m, diagnosis_code dc, prescription p
+where m.name = p.name_med and m.lab = p.lab and m.dosage = p.dosage and
+p.code = dc.code
+group by diagnosis_code.code
+order by count(medication.name);
+
+
+
+
+6. Present the average number of assistants, procedures, diagnostic codes,
+and prescriptions involved in consults from the year of 2017.
+
+select avg(count(assistant.VAT)), avg(count(procedure.KEYDISTO)), avg(count(diagnosis_code.code)), avg(count(prescription.KEYDISTO))
+from assistant a, procedure p, consult c, consult_diagnosis cd, diagnosis_code dc, prescription pres
+where a.VAT = p.VAT and
+p.name = c.name and p.VAT_owner = c.VAT_owner and p.date_timestamp = c.date_timestamp and
+cd.name = c.name and cd.VAT_owner = c.VAT_owner and cd.date_timestamp = c.date_timestamp and
+cd.code = dc.code and
+cd.name = pres.name and cd.VAT_owner = pres.VAT_owner and cd.date_timestamp = pres.date_timestamp
+where year(c.date_timestamp) > 2016;
+
+
+
+7.For each animal sub-species of dog, present the name of the most
+common disease (i.e., the name associated to the most frequent diagnostic
+code for consults involving animals of that species). 
+
+
+select dc.name from diagnosis_code as dc, consult_diagnosis as cd, consult as c, animal as a
+where dc.code = cd.code and
+	cd.name = c.name and cd.VAT_owner = c.VAT_owner and cd.date_timestamp = c.date_timestamp and
+	c.name = a.name and c.VAT_owner = a.VAT_owner 
+	and a.species_name = 'dog' and dc.code in(
+		select code, count(code) from diagnosis_code 
+		group by code having count(code) = max(count(code)));
+		
+(Esta filtragem do ter o max count(code) deve estar mal)
+
+
+
+
+8. List the names of individuals that are simultaneously clients of the
+hospital (i.e., owners of animals or clients that have brought animals
+to consults) and employees of the hospital (i.e., veterinary doctors or
+assistants).
+
+select client.name from client where client.VAT in 
+	(select veterinary.VAT from veterinary union select assistant.VAT from assistant)
+	
+
+	
+	
+9. List the names and addresses of clients that only own birds as their
+pets (i.e., the clients for whom all the owned animals contain the
+word bird as part of the species name).
+
+select distinct client.name, client.address_street, client.address_city, client.address_zip 
+from client as c 
+where not exists(
+	select animal.name, animal.VAT from animal 
+	where animal.species_name like '%bird%'
+	and animal.name,animal.VAT not in(
+		select animal.name, animal.VAT from animal as a2, client as c2
+		where a2.VAT = c2.VAT
+		and c2.VAT = c.VAT));
+
+
+
+(Tem aqui a questão de a key ser dupla e nao sei muito bem se é "animal.name,animal.VAT not in")
+
+	
