@@ -287,6 +287,7 @@ insert into person values('ZJ 17 07 20', 'Ethan Williams','Sutton Ct Road', 'Sut
 insert into phone_number values('ZJ 17 07 20', '079 7422 0004');
 insert into client values('ZJ 17 07 20');
 insert into animal values('Tom','ZJ 17 07 20','cat','Grey','M','2015','3');
+insert into animal values('Bob','ZJ 17 07 20','bird','Grey','M','2018','0');
 
 
 
@@ -299,8 +300,11 @@ insert into procedure_ values ('Tom','ZJ 17 07 20','2018-02-24 14:00:00',3,'Tail
 insert into radiography values ('Tom','ZJ 17 07 20','2018-02-24 14:00:00',3,'C:x-ray');
 insert into consult_diagnosis values('BRKTAIL','Tom','ZJ 17 07 20','2018-01-05 09:00:00');
 insert into performed values('Tom','ZJ 17 07 20','2018-02-24 14:00:00',3,'SM 62 10 29 D');
+insert into medication values('Paracetemol','Dayer','100mg');
+insert into prescription values('BRKTAIL','Tom','ZJ 17 07 20','2018-02-24 14:00:00','Paracetemol','Dayer','100mg','12/12h');
 
 
+insert into consult values('Bob','ZJ 17 07 20','2018-05-30 14:00:00','Nothing of concern','','','','ZJ 17 07 20','EA 24 06 86',0.5);
 
 
 insert into consult values('Jerry','CB 46 92 95 B','2018-01-05 10:00:00','Jerry doesnt want to eat and remains still all the time','urinanalysis shows presence of toxin','poisioning','admission to clinic and surveillance','CB 46 92 95 B','EA 24 06 86',0.15);
@@ -308,7 +312,7 @@ insert into consult values('Jerry','CB 46 92 95 B','2018-01-25 16:00:00','Jerry 
 insert into diagnosis_code values('POSN','Poisoning');
 insert into procedure_ values ('Jerry','CB 46 92 95 B','2018-01-25 16:00:00',4,'Poison');
 insert into test_procedure values ('Jerry','CB 46 92 95 B','2018-01-25 16:00:00',4,'urine');
-insert into indicator values ('Poison','0','pg','Amount of poison');
+insert into indicator values ('Poison','0','picograms','Amount of poison');
 insert into produced_indicator values ('Jerry','CB 46 92 95 B','2018-01-25 16:00:00',4,'Poison','9');
 insert into medication values('Tarinum Forte','Dayer','10mg');
 insert into prescription values('POSN','Jerry','CB 46 92 95 B','2018-01-25 16:00:00','Tarinum Forte','Dayer','10mg','12/12h for 5 days IV');
@@ -317,20 +321,27 @@ insert into consult_diagnosis values('POSN','Jerry','CB 46 92 95 B','2018-01-05 
 
 
 
-insert into consult values('Marley','ZJ 37 07 20','2018-03-14 10:00:00','Looks fat and is unable to jump','High weight and fat percentage','Obesity and diabetes','Medication, meal cut and excercise','ZJ 37 07 20','EA 24 06 86',40.2);
+insert into consult values('Marley','ZJ 37 07 20','2018-03-14 10:00:00','Looks fat and is unable to jump','Obesity','high weight ','Medication, meal cut and excercise','ZJ 37 07 20','EA 24 06 86',40.2);
 insert into diagnosis_code values('DIBT','Diabetes');
 insert into consult_diagnosis values('DIBT','Marley','ZJ 37 07 20','2018-03-14 10:00:00');	
 
-insert into consult values('Marley','ZJ 37 07 20','2017-09-08 08:00:00','Doesnt want to eat or play','High level of enzimes','Kidney failure','Medication and admission','ZJ 37 07 20','CY 10 60 11 A',29.8);
+insert into consult values('Marley','ZJ 37 07 20','2017-09-08 08:00:00','Doesnt want to eat or play','High level of enzimes','Kidney failure','Medication and admission','ZJ 37 07 20','CY 10 60 11 A',30.8);
 insert into diagnosis_code values('KDNFLR','Kidney failure');
 insert into medication values('Adaytidah polipstiso','Dayer','50mg');
 insert into prescription values('KDNFLR','Marley','ZJ 37 07 20','2017-09-08 08:00:00','Adaytidah polipstiso','Dayer','50mg','everyday for 2 weeks');
 insert into procedure_ values ('Marley','ZJ 37 07 20','2017-09-08 08:00:00',1,'Enzime test');
 insert into test_procedure values ('Marley','ZJ 37 07 20','2017-09-08 08:00:00',1,'blood');
-insert into indicator values ('Kidney Enzime','10','mg','Level of enzimes of kidney function');
+insert into indicator values ('Kidney Enzime','115','milligrams','Level of enzimes of kidney function');
 insert into produced_indicator values ('Marley','ZJ 37 07 20','2017-09-08 08:00:00',1,'Kidney Enzime','2');
 insert into consult_diagnosis values('KDNFLR','Marley','ZJ 37 07 20','2017-09-08 08:00:00');
 insert into participation values ('Marley','ZJ 37 07 20','2018-03-14 10:00:00','CB 46 16 95 B');
+
+insert into consult values('Marley','ZJ 37 07 20','2017-06-12 15:00:00','Nothing in particular','No indication of problems','Healthy','Annual vaccination','ZJ 37 07 20','EA 24 06 86',28);
+insert into consult values('Marley','ZJ 37 07 20','2017-09-28 18:00:00','Limps on the left paw','X-ray shows broken limb','Broken paw','Cast','ZJ 37 07 20','CY 10 60 11 A',27);
+insert into diagnosis_code values('BRKPAW','Broken paw');
+insert into procedure_ values ('Marley','ZJ 37 07 20','2017-09-28 18:00:00',5,'paw X-Ray');
+insert into radiography values ('Marley','ZJ 37 07 20','2017-09-28 18:00:00',5,'C:x-ray');
+insert into consult_diagnosis values('BRKPAW','Marley','ZJ 37 07 20','2017-06-12 15:00:00');
 
 
 
@@ -338,7 +349,6 @@ insert into participation values ('Marley','ZJ 37 07 20','2018-03-14 10:00:00','
 insert into consult values('Francis','WT 72 72 72 A','2018-06-08 10:00:00','Nothing in particular','No indication of problems','Healthy','Annual vaccination','WT 72 72 72 A','EA 24 06 86',2.0);
 insert into consult values('Francis','WT 72 72 72 A','2017-12-15 12:30:00','Sneezes a lot, doesnt eat or play','High temperature and reddish throat','Feline Flue','Medication','WT 72 72 72 A','CY 10 60 11 A',0.7);
 insert into diagnosis_code values('FLFLU','Feline Flu');
-insert into medication values('Paracetemol','Dayer','100mg');
 insert into medication values('Ibuprofen','Mistic','35mg');
 insert into prescription values('FLFLU','Francis','WT 72 72 72 A','2017-12-15 12:30:00','Paracetemol','Dayer','100mg','12/12h until next consult');
 insert into prescription values('FLFLU','Francis','WT 72 72 72 A','2017-12-15 12:30:00','Ibuprofen','Mistic','35mg','12/12h until next consult');
@@ -349,15 +359,6 @@ insert into consult_diagnosis values('FLFLU','Francis','WT 72 72 72 A','2018-06-
 insert into consult values('Minnie','WT 72 72 72 A','2018-06-08 10:30:00','Large belly','Eco shows 3 fetus','Pregnant','No action required','WT 72 72 72 A','EA 24 06 86',2.6);
 insert into procedure_ values ('Minnie','WT 72 72 72 A','2018-06-08 10:30:00',2,'Abdominal Eco');
 insert into radiography values ('Minnie','WT 72 72 72 A','2018-06-08 10:30:00',2,'C:Ecos');
-
-
-
-insert into consult values('Marley','ZJ 37 07 20','2017-06-12 15:00:00','Nothing in particular','No indication of problems','Healthy','Annual vaccination','ZJ 37 07 20','EA 24 06 86',28);
-insert into consult values('Marley','ZJ 37 07 20','2017-09-28 18:00:00','Limps on the left paw','X-ray shows broken limb','Broken paw','Cast','ZJ 37 07 20','CY 10 60 11 A',27);
-insert into diagnosis_code values('BRKPAW','Broken paw');
-insert into procedure_ values ('Marley','ZJ 37 07 20','2017-09-28 18:00:00',5,'paw X-Ray');
-insert into radiography values ('Marley','ZJ 37 07 20','2017-09-28 18:00:00',5,'C:x-ray');
-insert into consult_diagnosis values('BRKPAW','Marley','ZJ 37 07 20','2017-06-12 15:00:00');
 
 
 
@@ -378,7 +379,8 @@ insert into consult_diagnosis values('FLFLU','Oreo','EM 97 43 84','2018-06-10 17
 
 
 
-insert into consult values('Oscar','NH 08 51 10','2018-04-14 15:00:00','Looks fat and is unable to jump','High weight and fat percentage','Obesity and diabetes','Medication, meal cut and excercise','NH 08 51 10','EA 24 06 86',40.2);
+insert into consult values('Oscar','NH 08 51 10','2018-04-14 15:00:00','Looks fat and is unable to jump','Obese','high weight and fat','Medication, meal cut and excercise','NH 08 51 10','EA 24 06 86',40.2);
+insert into consult values('Oscar','NH 08 51 10','2018-08-14 15:00:00','Nothing in particular','No indication of problems','Healthy','No action required','NH 08 51 10','EA 24 06 86',28.2);
 
 
 
@@ -386,7 +388,7 @@ insert into consult values('Odie','CB 46 16 95 B','2018-01-30 17:45:00','Nothing
 
 
 
-insert into consult values('Garfield','CB 46 16 95 B','2018-01-31 18:00:00','Looks fat and is unable to jump','High weight and fat percentage','Obesity and diabetes','Medication, meal cut and excercise','NH 08 51 10','EA 24 06 86',6.2);
+insert into consult values('Garfield','CB 46 16 95 B','2018-01-31 18:00:00','Looks fat and is unable to jump','Obese','High weight and fat percentage','Medication, meal cut and excercise','NH 08 51 10','EA 24 06 86',6.2);
 insert into consult_diagnosis values ('DIBT','Garfield','CB 46 16 95 B','2018-01-31 18:00:00');
 
 
