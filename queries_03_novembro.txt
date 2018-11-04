@@ -14,7 +14,8 @@ select animal.name, person.name,person.VAT, species_name, age from animal inner 
     and client.VAT=person.VAT;
 
 
-não se pode fazer natural join a estas tabelas porque os nomes, VATs estão todos misturados e têm valores diferentes entre tabelas!
+não se pode fazer natural join a estas tabelas porque os nomes, VATs estão todos misturados e têm valores diferentes 
+entre tabelas!
 
 
 
@@ -27,6 +28,8 @@ select name, reference_value from indicator
     where units = 'milligrams' 
     and reference_value > 100
         order by reference_value desc;
+
+(Falta acrescentar mais um para ter a certeza que está por ordem decrescente)
 
 
 
