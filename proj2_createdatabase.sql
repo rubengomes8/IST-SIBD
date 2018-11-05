@@ -397,3 +397,5 @@ insert into consult values ('Shiro', 'EA 24 06 86', '2018-01-30 17:45:00', 'Noth
 
 insert into indicator values ('Kidney Enzime 2','150','milligrams','Level of enzimes of kidney function 2');
 insert into indicator values ('Kidney Enzime 3','50','milligrams','Level of enzimes of kidney function 3');
+
+insert into indicator values ('Carnine Enzime','250','picograms','Level of enzimes of Carnine');

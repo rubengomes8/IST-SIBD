@@ -2,9 +2,9 @@
 participated in consults with a veterinary doctor named John Smith.
 
 
-select animal.name, person.name,person.VAT, species_name, age from animal inner join client inner join person
+select animal.name, person.name, species_name, age from animal inner join client inner join person
     where exists( 
-        select consult.name,consult.VAT_owner from consult
+        select consult.name, consult.VAT_owner from consult
         where consult.VAT_vet in(
             select VAT from person natural join veterinary 
             where person.name = 'John Smith')
@@ -13,7 +13,7 @@ select animal.name, person.name,person.VAT, species_name, age from animal inner 
     and animal.VAT = client.VAT
     and client.VAT=person.VAT;
 
-
+John Smith.VAT é EA 24 06 86; acho que está bem (Rúben&Renato)
 não se pode fazer natural join a estas tabelas porque os nomes, VATs estão todos misturados e têm valores diferentes 
 entre tabelas!
 
@@ -28,6 +28,9 @@ select name, reference_value from indicator
     where units = 'milligrams' 
     and reference_value > 100
         order by reference_value desc;
+        
+        
+acho que está bem (Rúben&Renato)
 
 
 
