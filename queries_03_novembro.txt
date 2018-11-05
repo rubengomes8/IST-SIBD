@@ -29,9 +29,6 @@ select name, reference_value from indicator
     and reference_value > 100
         order by reference_value desc;
 
-(Falta acrescentar mais um para ter a certeza que está por ordem decrescente)
-
-
 
 
 3.(CORRECT)List the name, owner name, species and age for all animals with the
