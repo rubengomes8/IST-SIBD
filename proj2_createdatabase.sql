@@ -247,6 +247,10 @@ insert into client values('CB 46 16 95 B');
 insert into animal values('Garfield','CB 46 16 95 B','Cat','Orange','M','2014','4');
 insert into animal values('Odie','CB 46 16 95 B','dog','White','M','2015','3');
 
+insert into person values('ZA 16 10 97','Walter White', 'Albuquerque','Albuquerque City', 'AB7 WWN');
+insert into phone_number values('ZA 16 10 97','078 6911 1109');
+insert into client  values('ZA 16 10 97');
+
 insert into person values('NH 08 51 10','Liam Morgan', 'Ecclesbourne Road','Croydon', 'CR7 7BN');
 insert into phone_number values('NH 08 51 10','078 6008 1591');
 insert into client  values('NH 08 51 10');

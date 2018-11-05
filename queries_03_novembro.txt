@@ -53,14 +53,23 @@ select animal.name, person.name, species_name, age from animal inner join client
             and consult.VAT_owner = animal.VAT)
     and animal.VAT = client.VAT
     and client.VAT=person.VAT;
+    
+(Errado a query 3)
 	
 convem adicionar uma consulta recente com peso > 30 mas sem obesidades
 
 
 4.(CORRECT) List the name, VAT and address of all clients of the hospital that are not owners of animals
 
-select person.name, person.VAT, person.address_street, person.address_city, person.address_zip from person
-where person.VAT not in (select animal.VAT from animal);
+select person.name, person.VAT, person.address_street, person.address_city, person.address_zip from person, client
+where person.VAT = client.VAT and
+client.VAT not in (select animal.VAT from animal);
+
+(Adicionar à base de dados um cliente que não é dono de um animal)
+insert into person values('ZA 16 10 97','Walter White', 'Albuquerque','Albuquerque City', 'AB7 WWN');
+insert into phone_number values('ZA 16 10 97','078 6911 1109');
+insert into client  values('ZA 16 10 97');
+
 
 5. (CORRECT) For each possible diagnosis, list the number of distinct medication
 names that have been prescribed to treat that condition. Sort the
