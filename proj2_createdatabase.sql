@@ -394,3 +394,6 @@ insert into consult_diagnosis values ('DIBT','Garfield','CB 46 16 95 B','2018-01
 
 
 insert into consult values ('Shiro', 'EA 24 06 86', '2018-01-30 17:45:00', 'Nothing in particular', 'No indication of problems', 'Healthy', 'No action required', 'EA 24 06 86', 'CY 10 60 11 A', 8);
+
+insert into indicator values ('Kidney Enzime 2','150','milligrams','Level of enzimes of kidney function 2');
+insert into indicator values ('Kidney Enzime 3','50','milligrams','Level of enzimes of kidney function 3');
