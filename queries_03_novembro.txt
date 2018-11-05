@@ -65,10 +65,7 @@ select person.name, person.VAT, person.address_street, person.address_city, pers
 where person.VAT = client.VAT and
 client.VAT not in (select animal.VAT from animal);
 
-(Adicionar à base de dados um cliente que não é dono de um animal)
-insert into person values('ZA 16 10 97','Walter White', 'Albuquerque','Albuquerque City', 'AB7 WWN');
-insert into phone_number values('ZA 16 10 97','078 6911 1109');
-insert into client  values('ZA 16 10 97');
+acho que está bem (Rúben&Renato)
 
 
 5. (CORRECT) For each possible diagnosis, list the number of distinct medication
@@ -82,6 +79,7 @@ p.code = dc.code
 group by dc.code
 order by count(m.name);
 
+acho que está bem (Rúben&Renato)
 
 6. Present the average number of assistants, procedures, diagnostic codes,
 and prescriptions involved in consults from the year of 2017.
@@ -129,8 +127,8 @@ assistants).
 select person.name from person natural join client
     where client.VAT in 
 	    (select veterinary.VAT from veterinary union select assistant.VAT from assistant);
-	
-
+	    
+acho que está bem (Rúben&Renato) porque todos os owners são clientes!
 	
 	
 9.(CORRECT-mas não sei porque) List the names and addresses of clients that only own birds as their
@@ -151,7 +149,7 @@ where exists(
     );
 
 
-
+Renato: Achamos que falta um pormenor, porque se o species_name fôr papagaio, não vai aparecer, mas é um bird
 (Tem aqui a questão de a key ser dupla e nao sei muito bem se é "animal.name,animal.VAT not in")
 
 	
