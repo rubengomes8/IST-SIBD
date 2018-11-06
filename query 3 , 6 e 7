@@ -1,0 +1,45 @@
+6.
+
+select count(name_med)/(select count(*) from consult where year(date_timestamp) = 2017) as avg_prescriptions, 
+count(VAT_assistant)/(select count(*) from consult where year(date_timestamp) = 2017) as avg_assistants,
+count(num)/(select count(*) from consult where year(date_timestamp) = 2017) as avg_procedures,
+count(consult_diagnosis.code)/(select count(*) from consult where year(date_timestamp) = 2017) as avg_diagnosis_codes
+from consult left outer join prescription on consult.VAT_owner = prescription.VAT_owner and consult.name = prescription.name and consult.date_timestamp = prescription.date_timestamp 
+left outer join participation on consult.VAT_owner = participation.VAT_owner and consult.name = participation.name and consult.date_timestamp = participation.date_timestamp 
+left outer join procedure_ on consult.VAT_owner = procedure_.VAT_owner and consult.name = procedure_.name and consult.date_timestamp = procedure_.date_timestamp 
+left outer join consult_diagnosis on consult.VAT_owner = consult_diagnosis.VAT_owner and consult.name = consult_diagnosis.name and consult.date_timestamp = consult_diagnosis.date_timestamp 
+where year(consult.date_timestamp) = 2017;
+
+
+7. 7.For each animal sub-species of dog, present the name of the most
+common disease (i.e., the name associated to the most frequent diagnostic
+code for consults involving animals of that species). 
+
+
+select animal.name, dc.name from diagnosis_code as dc, consult_diagnosis as cd, consult as c, animal as a, generalization_species as gs
+    where dc.code = cd.code and
+	cd.name = c.name and cd.VAT_owner = c.VAT_owner and cd.date_timestamp = c.date_timestamp and
+	c.name = a.name and c.VAT_owner = a.VAT_owner 
+	and a.species_name = 'dog' 
+    and dc.code in(
+		select code, count(code) from diagnosis_code
+        group by code 
+        having count(code) = max(count(code))
+    );
+    
+ -- vai buscar todos os cães   
+select animal.name from animal, generalization_species
+where animal.species_name = generalization_species.name1 
+and generalization_species.name2 = 'dog';
+
+-- select * from animal natural join consult_diagnosis;
+
+-- select code, count(code) from animal natural join consult_diagnosis  
+group by code order by count(code) desc limit 1;
+
+
+    
+    
+
+		
+(Esta filtragem do ter o max count(code) deve estar mal)
