@@ -49,15 +49,7 @@ and c1.weight > 30
 and c1.o like '%obese%' or c1.o like '%obesity%'
 and c1.VAT_owner = animal.VAT
 and c1.VAT_owner = person.VAT);
-    
-
-ISTO FUNCIONA MAS TEMOS DE APRESENTAR ATRIBUTOS DIFERENTES E AI DEIXA DE FUNCIONAR
-select distinct c1.name, date_timestamp from consult c1
-where date_timestamp = 
-(select max(date_timestamp) from consult c2 where c1.name = c2.name and c1.VAT_owner = c2.VAT_owner)
-and c1.weight > 30
-and c1.o like '%obese%' or c1.o like '%obesity%';
-	
+    	
 convem adicionar uma consulta recente com peso > 30 mas sem obesidades
 
 
