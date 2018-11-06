@@ -32,10 +32,15 @@ select animal.name from animal, generalization_species
 where animal.species_name = generalization_species.name1 
 and generalization_species.name2 = 'dog';
 
--- select * from animal natural join consult_diagnosis;
 
 -- select code, count(code) from animal natural join consult_diagnosis  
 group by code order by count(code) desc limit 1;
+
+-- outro teste
+select a.name, cd.code, count(cd.code) from animal a left outer join consult_diagnosis cd on a.name = cd.name and a.VAT = cd.VAT_owner, generalization_species
+where a.species_name = generalization_species.name1 
+and generalization_species.name2 = 'dog'
+group by code order by count(code) desc;
 
 
     
