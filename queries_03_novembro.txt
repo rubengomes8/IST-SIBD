@@ -39,22 +39,17 @@ most recent weight above 30 kilograms, and where the objective part
 of any SOAP note, associated to consults of that animal, mentions
 terms like obesity or obese.
 
-select animal.name, person.name, species_name, age from animal inner join client inner join person
-    where exists(
-            select c1.name, c1.VAT_owner, c1.weight, MAX(c1.date_timestamp) from consult c1
-                where c1.name = animal.name
-                and c1.VAT_owner = animal.VAT
-                group by c1.name, c1.VAT_owner
-                having c1.weight > 30)
-    and exists(
-        select consult.name, consult.VAT_owner from consult
-            where consult.o like '%obese%' or consult.o like '%obesity%'
-            and consult.name = animal.name
-            and consult.VAT_owner = animal.VAT)
-    and animal.VAT = client.VAT
-    and client.VAT=person.VAT;
+select animal.name, person.name, species_name, age from animal inner join person
+where
+exists(
+select distinct c1.name, date_timestamp from consult c1
+where date_timestamp = 
+(select max(date_timestamp) from consult c2 where c1.name = c2.name and c1.VAT_owner = c2.VAT_owner)
+and c1.weight > 30
+and c1.o like '%obese%' or c1.o like '%obesity%'
+and c1.VAT_owner = animal.VAT
+and c1.VAT_owner = person.VAT);
     
-(Errado a query 3)
 
 ISTO FUNCIONA MAS TEMOS DE APRESENTAR ATRIBUTOS DIFERENTES E AI DEIXA DE FUNCIONAR
 select distinct c1.name, date_timestamp from consult c1
