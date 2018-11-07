@@ -23,13 +23,13 @@ insert into species values ('labrador','Labrador is a type of retriever-gun dog.
 
 insert into generalization_species values ('labrador','dog');
 
-insert into species values ('parrot','Parrots, also known as psittacines are birds of the roughly 393 species in 92 genera that make up the order Psittaciformes, found in most tropical and subtropical regions');
+insert into species values ('bird parrot','Parrots, also known as psittacines are birds of the roughly 393 species in 92 genera that make up the order Psittaciformes, found in most tropical and subtropical regions');
 
-insert into generalization_species values ('parrot','bird');
+insert into generalization_species values ('bird parrot','bird');
 
-insert into species values ('canary','The domestic canary, often simply known as the canary is a domesticated form of the wild canary, a small songbird in the finch family originating from the Macaronesian Islands');
+insert into species values ('bird canary','The domestic canary, often simply known as the canary is a domesticated form of the wild canary, a small songbird in the finch family originating from the Macaronesian Islands');
 
-insert into generalization_species values ('canary','bird');
+insert into generalization_species values ('bird canary','bird');
 
 insert into species values ('pug','The Pug is a breed of dog with physically distinctive features of a wrinkly, short-muzzled face, and curled tail.');
 
