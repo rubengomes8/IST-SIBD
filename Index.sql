@@ -1,7 +1,7 @@
 --**1**
 
 create index person_client
-on client;
+on client(VAT);
 
 create index animal_client
 on animal(VAT);
@@ -11,13 +11,9 @@ on animal(VAT);
 
 --**2**
 
-create non clustering index ind_units
+create nonclustered index ind_units
 on indicator(units);
 
 
-create non clustering index ind_ref
-on indicator(reference_value)
-where reference_value > 100; -- não sei se isto é assim tão necessário
-
-
---uma secondary-key(non clustering) index com ponteiros para os 'records' pretendidos
+create index ind_ref
+on indicator(reference_value);
