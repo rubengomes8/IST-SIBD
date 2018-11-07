@@ -1,0 +1,23 @@
+--**1**
+
+create index person_client
+on client;
+
+create index animal_client
+on animal(VAT);
+
+
+--Indexar estas tableas acelera o processo de join nas query.
+
+--**2**
+
+create non clustering index ind_units
+on indicator(units);
+
+
+create non clustering index ind_ref
+on indicator(reference_value)
+where reference_value > 100; -- não sei se isto é assim tão necessário
+
+
+--uma secondary-key(non clustering) index com ponteiros para os 'records' pretendidos
