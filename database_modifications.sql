@@ -8,6 +8,8 @@ and person.VAT = person.VAT_owner
 and person.address_zip = person.address_zip
 where person.name = 'John Smith' and person.VAT in (select client.VAT from client);
 
+-- porque fazes and person.name = person.name and person.VAT = person.VAT_owner and person.address_zip = person.address_zip ?? acho que naoo e preciso
+
 
 **2**
 
