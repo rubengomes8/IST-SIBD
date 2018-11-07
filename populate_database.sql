@@ -26,9 +26,9 @@ insert into species values ('labrador','Labrador is a type of retriever-gun dog.
 
 insert into generalization_species values ('labrador','dog');
 
-insert into species values ('parrot','Parrots, also known as psittacines are birds of the roughly 393 species in 92 genera that make up the order Psittaciformes, found in most tropical and subtropical regions');
+insert into species values ('parrot bird','Parrots, also known as psittacines are birds of the roughly 393 species in 92 genera that make up the order Psittaciformes, found in most tropical and subtropical regions');
 
-insert into generalization_species values ('parrot','bird');
+insert into generalization_species values ('parrot bird','bird');
 
 insert into species values ('canary','The domestic canary, often simply known as the canary is a domesticated form of the wild canary, a small songbird in the finch family originating from the Macaronesian Islands');
 
@@ -95,7 +95,7 @@ insert into animal values('Oreo','EM 97 43 84','siamese','White','M','2017','1')
 insert into person values('GS 14 83 38 A','Ethan Peacock','Streatham Vale','London', 'SW16 5TB');
 insert into phone_number values('GS 14 83 38 A','079 7140 4420');
 insert into client values('GS 14 83 38 A');
-insert into animal values('Bob','GS 14 83 38 A','parrot','Green','M','2017','1');
+insert into animal values('Bob','GS 14 83 38 A','parrot bird','Green','M','2017','1');
 insert into animal values('Boby','GS 14 83 38 A','bird','Blue','M','2017','1');
 
 --client
