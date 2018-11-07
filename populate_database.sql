@@ -2,7 +2,9 @@
 
 -- species(name,desc)
 -- generalization_species(name1,name2)
-insert into generalization_species values ('mammal',null);
+insert into species values ('mammal', 'Mammals are a clade of endothermic amniotes that possesses  a neocortex, hair, three middle ear bones, and mammary glands. ');
+
+insert into species values ('aviary', 'An aviary is a large enclosure for confining birds.');
 
 insert into species values ('cat', 'A cat is a small, typically furry, carnivorous mammal');
 
@@ -24,13 +26,13 @@ insert into species values ('labrador','Labrador is a type of retriever-gun dog.
 
 insert into generalization_species values ('labrador','dog');
 
-insert into species values ('bird parrot','Parrots, also known as psittacines are birds of the roughly 393 species in 92 genera that make up the order Psittaciformes, found in most tropical and subtropical regions');
+insert into species values ('parrot','Parrots, also known as psittacines are birds of the roughly 393 species in 92 genera that make up the order Psittaciformes, found in most tropical and subtropical regions');
 
-insert into generalization_species values ('bird parrot','bird');
+insert into generalization_species values ('parrot','bird');
 
-insert into species values ('bird canary','The domestic canary, often simply known as the canary is a domesticated form of the wild canary, a small songbird in the finch family originating from the Macaronesian Islands');
+insert into species values ('canary','The domestic canary, often simply known as the canary is a domesticated form of the wild canary, a small songbird in the finch family originating from the Macaronesian Islands');
 
-insert into generalization_species values ('bird canary','bird');
+insert into generalization_species values ('canary','bird');
 
 insert into species values ('pug','The Pug is a breed of dog with physically distinctive features of a wrinkly, short-muzzled face, and curled tail.');
 
@@ -94,6 +96,7 @@ insert into person values('GS 14 83 38 A','Ethan Peacock','Streatham Vale','Lond
 insert into phone_number values('GS 14 83 38 A','079 7140 4420');
 insert into client values('GS 14 83 38 A');
 insert into animal values('Bob','GS 14 83 38 A','parrot','Green','M','2017','1');
+insert into animal values('Boby','GS 14 83 38 A','bird','Blue','M','2017','1');
 
 --client
 insert into person values('YL 71 92 45 B','Henry Dennis', 'Grove Road','Mitcham','CR4 1AB');
@@ -126,6 +129,7 @@ insert into phone_number values('ZJ 17 07 20', '079 7422 0004');
 insert into client values('ZJ 17 07 20');
 insert into animal values('Tom','ZJ 17 07 20','scottish fold','Grey','M','2015','3');
 insert into animal values('Bob','ZJ 17 07 20','canary','Grey','M','2018','0');
+insert into animal values('Bobbie','ZJ 17 07 20','bird','Grey','M','2018','0');
 
 
 
@@ -163,6 +167,9 @@ insert into medication values('Tarinum Forte','Dayer','10mg');
 insert into prescription values('POSN','Jerry','CB 46 92 95 B','2018-01-25 16:00:00','Tarinum Forte','Dayer','10mg','12/12h for 5 days IV');
 insert into consult_diagnosis values('POSN','Jerry','CB 46 92 95 B','2018-01-05 10:00:00');
 
+
+
+
 insert into consult values('Marley','ZJ 37 07 20','2018-03-14 10:00:00','Looks fat and is unable to jump','Obesity','high weight ','Medication, meal cut and excercise','ZJ 37 07 20','EA 24 06 86',40.2);
 insert into diagnosis_code values('DIBT','Diabetes');
 insert into consult_diagnosis values('DIBT','Marley','ZJ 37 07 20','2018-03-14 10:00:00');	
@@ -185,6 +192,9 @@ insert into procedure_ values ('Marley','ZJ 37 07 20','2017-09-28 18:00:00',5,'p
 insert into radiography values ('Marley','ZJ 37 07 20','2017-09-28 18:00:00',5,'C:x-ray');
 insert into consult_diagnosis values('BRKPAW','Marley','ZJ 37 07 20','2017-06-12 15:00:00');
 
+
+
+
 insert into consult values('Francis','WT 72 72 72 A','2018-06-08 10:00:00','Nothing in particular','No indication of problems','Healthy','Annual vaccination','WT 72 72 72 A','EA 24 06 86',2.0);
 insert into consult values('Francis','WT 72 72 72 A','2017-12-15 12:30:00','Sneezes a lot, doesnt eat or play','High temperature and reddish throat','Feline Flue','Medication','WT 72 72 72 A','CY 10 60 11 A',0.7);
 insert into diagnosis_code values('FLFLU','Feline Flu');
@@ -193,43 +203,51 @@ insert into prescription values('FLFLU','Francis','WT 72 72 72 A','2017-12-15 12
 insert into prescription values('FLFLU','Francis','WT 72 72 72 A','2017-12-15 12:30:00','Ibuprofen','Mistic','35mg','12/12h until next consult');
 insert into consult_diagnosis values('FLFLU','Francis','WT 72 72 72 A','2018-06-08 10:00:00');	
 
+
+
 insert into consult values('Minnie','WT 72 72 72 A','2018-06-08 10:30:00','Large belly','Eco shows 3 fetus','Pregnant','No action required','WT 72 72 72 A','EA 24 06 86',2.6);
 insert into procedure_ values ('Minnie','WT 72 72 72 A','2018-06-08 10:30:00',2,'Abdominal Eco');
 insert into radiography values ('Minnie','WT 72 72 72 A','2018-06-08 10:30:00',2,'C:Ecos');
 
+
+
 insert into consult values('Luna','YL 71 92 45 B','2018-05-12 14:00:00','Nothing in particular','No indication of problems','Healthy','Annual vaccination','YL 71 92 45 B','EA 24 06 86',14);
 insert into consult values('Luna','YL 71 92 45 B','2018-08-26 10:30:00','Nothing in particular','No indication of problems','Healthy','Annual vaccination','YL 71 92 45 B','EA 24 06 86',13);	
 
+
+
 insert into consult values('Bob','GS 14 83 38 A','2017-10-12 17:45:00','Nothing in particular','No indication of problems','Healthy','No action required','GS 14 83 38 A','EA 24 06 86',0.8);	
 insert into consult values('Bob','GS 14 83 38 A','2018-02-25 17:00:00','Found outdoors, appears lost','No indication of problems','Healthy','No action required','ZJ 17 07 20','EA 24 06 86',0.7);
+
+
 
 insert into consult values('Oreo','EM 97 43 84','2018-06-10 17:00:00','Sneezes a lot, doesnt eat or play','High temperature and reddish throat','Feline Flue','Medication','EM 97 43 84','CY 10 60 11 A',4);
 insert into prescription values('FLFLU','Oreo','EM 97 43 84','2018-06-10 17:00:00','Paracetemol','Dayer','100mg','12/12h until next consult');
 insert into prescription values('FLFLU','Oreo','EM 97 43 84','2018-06-10 17:00:00','Ibuprofen','Mistic','35mg','12/12h until next consult');		
 insert into consult_diagnosis values('FLFLU','Oreo','EM 97 43 84','2018-06-10 17:00:00');
 
+
+
 insert into consult values('Oscar','NH 08 51 10','2018-04-14 15:00:00','Looks fat and is unable to jump','Obese','high weight and fat','Medication, meal cut and excercise','NH 08 51 10','EA 24 06 86',40.2);
 insert into consult values('Oscar','NH 08 51 10','2018-08-14 15:00:00','Nothing in particular','No indication of problems','Healthy','No action required','NH 08 51 10','EA 24 06 86',28.2);
 
+
+
 insert into consult values('Odie','CB 46 16 95 B','2018-01-30 17:45:00','Nothing in particular','No indication of problems','Healthy','No action required','CB 46 16 95 B','EA 24 06 86',10);
+
+
 
 insert into consult values('Garfield','CB 46 16 95 B','2018-01-31 18:00:00','Looks fat and is unable to jump','Obese','High weight and fat percentage','Medication, meal cut and excercise','NH 08 51 10','EA 24 06 86',6.2);
 insert into consult_diagnosis values ('DIBT','Garfield','CB 46 16 95 B','2018-01-31 18:00:00');
 
+
+
 insert into consult values ('Shiro', 'EA 24 06 86', '2018-01-30 17:45:00', 'Nothing in particular', 'No indication of problems', 'Healthy', 'No action required', 'EA 24 06 86', 'CY 10 60 11 A', 8);
 
--- Add 2 same diagnosis for the dog Luna (To validate query 7)
-insert into consult values('Luna','YL 71 92 45 B','2018-10-07 17:00:00','Tail injury due a fight','Lose a big quantity of blood','Broken tail','Medication','YL 71 92 45 B','EA 24 06 86', 28.2);
+insert into consult values('Luna','YL 71 92 45 B','2018-10-07 17:00:00','Tail injury due a fight','Lose a big quantity of blood','Broken tail','Medication','ZJ 17 07 20','EA 24 06 86',0.7);
 insert into prescription values('BRKTAIL','Luna','YL 71 92 45 B','2018-10-07 17:00:00','Paracetemol','Dayer','100mg','12/12h until next consult');
 insert into consult_diagnosis values('BRKTAIL','Luna','YL 71 92 45 B','2018-10-07 17:00:00');
 
-insert into consult values('Luna','YL 71 92 45 B','2018-11-07 17:00:00','Check tail injury due a fight','Still lose a big quantity of blood','Broken tail','Medication','YL 71 92 45 B','EA 24 06 86', 28.2);
+insert into consult values('Luna','YL 71 92 45 B','2018-11-07 17:00:00','Check tail injury due a fight','Still lose a big quantity of blood','Broken tail','Medication','ZJ 17 07 20','EA 24 06 86',0.7);
 insert into prescription values('BRKTAIL','Luna','YL 71 92 45 B','2018-11-07 17:00:00','Paracetemol','Dayer','100mg','12/12h until next consult');
 insert into consult_diagnosis values('BRKTAIL','Luna','YL 71 92 45 B','2018-11-07 17:00:00');
-
--- Add a recent consult with weight > 30 without %obese% or %obesity%
-insert into consult values ('Luna', 'YL 71 92 45 B', '2018-11-08 17:45:00', 'Nothing in particular', 'No indication of problems', 'Healthy', 'No action required', 'YL 71 92 45 B', 'CY 10 60 11 A', 30.1);
-
--- Add a extra diagnosis of DIBT for Marley
-insert into consult values('Marley','ZJ 37 07 20','2018-08-18 10:00:00','Looks fat and is unable to jump','Obesity','high weight ','Medication, meal cut and excercise','ZJ 37 07 20','EA 24 06 86',40.2);
-insert into consult_diagnosis values('DIBT','Marley','ZJ 37 07 20','2018-08-18 10:00:00');	
