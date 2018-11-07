@@ -2,6 +2,7 @@
 
 -- species(name,desc)
 -- generalization_species(name1,name2)
+insert into generalization_species values ('mammal',null);
 
 insert into species values ('cat', 'A cat is a small, typically furry, carnivorous mammal');
 
