@@ -112,10 +112,12 @@ select dc.name from diagnosis_code as dc, consult_diagnosis as cd, consult as c,
 --(Imprime os diagnosticos para cada cão e o número de vezes que este lhe foi atribuido
 --mas falta ir buscar para cada cao o que tiver maior count(cd.code))
 
-select a.name, a.VAT, cd.code, count(cd.code) from animal a inner join consult_diagnosis cd on a.name = cd.name and a.VAT = cd.VAT_owner, generalization_species
+select species_name,code from ( select a.species_name, cd.code, count(cd.code) from animal a inner join consult_diagnosis cd on a.name = cd.name and a.VAT = cd.VAT_owner, generalization_species
 where a.species_name = generalization_species.name1 
 and generalization_species.name2 = 'dog'
-group by a.name, a.VAT, code order by count(code) desc;
+group by a.species_name, code 
+order by count(code) desc) as t
+group by species_name;
 
 
 

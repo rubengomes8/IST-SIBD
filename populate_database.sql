@@ -42,7 +42,7 @@ insert into species values ('siamese','The Siamese cat is one of the first disti
 
 insert into generalization_species values ('siamese','cat');
 
-insert into species values ('scottish fold','The Scottish Fold is a breed of domestic cat with a natural dominant-gene mutation that affects cartilage throughout the body, causing the ears to "fold,” bending forward and down towards the front of the head, which gives the cat what is often described as an "owl-like" appearance.');
+insert into species values ('scottish fold','The Scottish Fold is a breed of domestic cat with a natural dominant-gene mutation that affects cartilage throughout the body, causing the ears to fold.');
 
 insert into generalization_species values ('scottish fold','cat');
 
@@ -234,7 +234,10 @@ insert into consult values('Oscar','NH 08 51 10','2018-08-14 15:00:00','Nothing 
 
 
 insert into consult values('Odie','CB 46 16 95 B','2018-01-30 17:45:00','Nothing in particular','No indication of problems','Healthy','No action required','CB 46 16 95 B','EA 24 06 86',10);
-
+insert into consult values('Odie','CB 46 16 95 B','2017-11-12 18:00:00','Limps on the left paw','X-ray shows broken limb','Broken paw','Cast','CB 46 16 95 B','CY 10 60 11 A',12);
+insert into procedure_ values ('Odie','CB 46 16 95 B','2017-11-12 18:00:00',5,'paw X-Ray');
+insert into radiography values ('Odie','CB 46 16 95 B','2017-11-12 18:00:00',5,'C:x-ray');
+insert into consult_diagnosis values('BRKPAW','Odie','CB 46 16 95 B','2017-11-12 18:00:00');
 
 
 insert into consult values('Garfield','CB 46 16 95 B','2018-01-31 18:00:00','Looks fat and is unable to jump','Obese','High weight and fat percentage','Medication, meal cut and excercise','NH 08 51 10','EA 24 06 86',6.2);
