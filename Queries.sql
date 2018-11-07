@@ -94,21 +94,6 @@ where year(consult.date_timestamp) = 2017;
 --7.For each animal sub-species of dog, present the name of the most common disease (i.e., the name associated to the most frequent diagnostic code for consults involving animals of that species). 
 
 
-select dc.name from diagnosis_code as dc, consult_diagnosis as cd, consult as c, animal as a
-    where dc.code = cd.code and
-	cd.name = c.name and cd.VAT_owner = c.VAT_owner and cd.date_timestamp = c.date_timestamp and
-	c.name = a.name and c.VAT_owner = a.VAT_owner 
-	and a.species_name = 'dog' 
-    and dc.code in(
-		select code, count(code) from diagnosis_code
-        group by code 
-        having count(code) = max(count(code))
-    );
-		
-
-
---(Imprime os diagnosticos para cada cão e o número de vezes que este lhe foi atribuido
---mas falta ir buscar para cada cao o que tiver maior count(cd.code))
 
 select species_name, name from ( select a.species_name, cd.code, dc.name, count(cd.code) from animal a inner join consult_diagnosis cd on a.name = cd.name and a.VAT = cd.VAT_owner, generalization_species,diagnosis_code as dc
 where a.species_name = generalization_species.name1 
