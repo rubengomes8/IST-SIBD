@@ -39,7 +39,7 @@ insert into species values ('siamese','The Siamese cat is one of the first disti
 
 insert into generalization_species values ('siamese','cat');
 
-insert into species values ('scottish fold','The Scottish Fold is a breed of domestic cat with a natural dominant-gene mutation that affects cartilage throughout the body, causing the ears to "fold,” bending forward and down towards the front of the head, which gives the cat what is often described as an "owl-like" appearance.');
+insert into species values ('scottish fold','The Scottish Fold is a breed of domestic cat with a natural dominant-gene mutation that affects cartilage throughout the body, causing the ears to "fold,â€ bending forward and down towards the front of the head, which gives the cat what is often described as an "owl-like" appearance.');
 
 insert into generalization_species values ('scottish fold','cat');
 
@@ -228,3 +228,7 @@ insert into consult_diagnosis values('BRKTAIL','Luna','YL 71 92 45 B','2018-11-0
 
 -- Add a recent consult with weight > 30 without %obese% or %obesity%
 insert into consult values ('Luna', 'YL 71 92 45 B', '2018-11-08 17:45:00', 'Nothing in particular', 'No indication of problems', 'Healthy', 'No action required', 'YL 71 92 45 B', 'CY 10 60 11 A', 30.1);
+
+-- Add a extra diagnosis of DIBT for Marley
+insert into consult values('Marley','ZJ 37 07 20','2018-08-18 10:00:00','Looks fat and is unable to jump','Obesity','high weight ','Medication, meal cut and excercise','ZJ 37 07 20','EA 24 06 86',40.2);
+insert into consult_diagnosis values('DIBT','Marley','ZJ 37 07 20','2018-08-18 10:00:00');	
