@@ -214,6 +214,9 @@ create table produced_indicator (
 
 -- species(name,desc)
 -- generalization_species(name1,name2)
+insert into species values ('mammal', 'Mammals are a clade of endothermic amniotes that possesses  a neocortex, hair, three middle ear bones, and mammary glands. ');
+
+insert into species values ('aviary', 'An aviary is a large enclosure for confining birds.');
 
 insert into species values ('cat', 'A cat is a small, typically furry, carnivorous mammal');
 
