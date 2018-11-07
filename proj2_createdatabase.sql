@@ -452,3 +452,10 @@ insert into consult_diagnosis values ('DIBT','Garfield','CB 46 16 95 B','2018-01
 insert into consult values ('Shiro', 'EA 24 06 86', '2018-01-30 17:45:00', 'Nothing in particular', 'No indication of problems', 'Healthy', 'No action required', 'EA 24 06 86', 'CY 10 60 11 A', 8);
 
 
+insert into consult values('Luna','YL 71 92 45 B','2018-10-07 17:00:00','Tail injury due a fight','Lose a big quantity of blood','Broken tail','Medication','ZJ 17 07 20','EA 24 06 86',0.7);
+insert into prescription values('BRKTAIL','Luna','YL 71 92 45 B','2018-10-07 17:00:00','Paracetemol','Dayer','100mg','12/12h until next consult');
+insert into consult_diagnosis values('BRKTAIL','Luna','YL 71 92 45 B','2018-10-07 17:00:00');
+
+insert into consult values('Luna','YL 71 92 45 B','2018-11-07 17:00:00','Check tail injury due a fight','Still lose a big quantity of blood','Broken tail','Medication','ZJ 17 07 20','EA 24 06 86',0.7);
+insert into prescription values('BRKTAIL','Luna','YL 71 92 45 B','2018-11-07 17:00:00','Paracetemol','Dayer','100mg','12/12h until next consult');
+insert into consult_diagnosis values('BRKTAIL','Luna','YL 71 92 45 B','2018-11-07 17:00:00');
