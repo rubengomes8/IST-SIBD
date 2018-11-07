@@ -67,8 +67,8 @@ create table generalization_species (
 	name1 varchar(255),
 	name2 varchar(255),
 	primary key(name1),
-	foreign key (name1) references species(name),
-	foreign key (name2) references species(name)
+	foreign key (name1) references species(name) on delete cascade,
+	foreign key (name2) references species(name) on delete cascade
 );
 
 create table animal (
@@ -305,6 +305,7 @@ insert into person values('GS 14 83 38 A','Ethan Peacock','Streatham Vale','Lond
 insert into phone_number values('GS 14 83 38 A','079 7140 4420');
 insert into client values('GS 14 83 38 A');
 insert into animal values('Bob','GS 14 83 38 A','parrot','Green','M','2017','1');
+insert into animal values('Boby','GS 14 83 38 A','bird','Blue','M','2017','1');
 
 --client
 insert into person values('YL 71 92 45 B','Henry Dennis', 'Grove Road','Mitcham','CR4 1AB');
@@ -337,6 +338,7 @@ insert into phone_number values('ZJ 17 07 20', '079 7422 0004');
 insert into client values('ZJ 17 07 20');
 insert into animal values('Tom','ZJ 17 07 20','scottish fold','Grey','M','2015','3');
 insert into animal values('Bob','ZJ 17 07 20','canary','Grey','M','2018','0');
+insert into animal values('Bobbie','ZJ 17 07 20','bird','Grey','M','2018','0');
 
 
 
