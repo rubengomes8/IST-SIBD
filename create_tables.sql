@@ -67,8 +67,8 @@ create table generalization_species (
 	name1 varchar(255),
 	name2 varchar(255),
 	primary key(name1),
-	foreign key (name1) references species(name),
-	foreign key (name2) references species(name)
+	foreign key (name1) references species(name) on delete cascade,
+	foreign key (name2) references species(name) on delete cascade
 );
 
 create table animal (
@@ -209,4 +209,3 @@ create table produced_indicator (
 	foreign key(name, VAT_owner, date_timestamp, num) references procedure_(name, VAT_owner, date_timestamp, num) on delete cascade,
 	foreign key(indicator_name) references indicator(name) on delete cascade
 );
-
