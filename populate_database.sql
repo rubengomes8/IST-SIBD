@@ -162,9 +162,6 @@ insert into medication values('Tarinum Forte','Dayer','10mg');
 insert into prescription values('POSN','Jerry','CB 46 92 95 B','2018-01-25 16:00:00','Tarinum Forte','Dayer','10mg','12/12h for 5 days IV');
 insert into consult_diagnosis values('POSN','Jerry','CB 46 92 95 B','2018-01-05 10:00:00');
 
-
-
-
 insert into consult values('Marley','ZJ 37 07 20','2018-03-14 10:00:00','Looks fat and is unable to jump','Obesity','high weight ','Medication, meal cut and excercise','ZJ 37 07 20','EA 24 06 86',40.2);
 insert into diagnosis_code values('DIBT','Diabetes');
 insert into consult_diagnosis values('DIBT','Marley','ZJ 37 07 20','2018-03-14 10:00:00');	
@@ -187,9 +184,6 @@ insert into procedure_ values ('Marley','ZJ 37 07 20','2017-09-28 18:00:00',5,'p
 insert into radiography values ('Marley','ZJ 37 07 20','2017-09-28 18:00:00',5,'C:x-ray');
 insert into consult_diagnosis values('BRKPAW','Marley','ZJ 37 07 20','2017-06-12 15:00:00');
 
-
-
-
 insert into consult values('Francis','WT 72 72 72 A','2018-06-08 10:00:00','Nothing in particular','No indication of problems','Healthy','Annual vaccination','WT 72 72 72 A','EA 24 06 86',2.0);
 insert into consult values('Francis','WT 72 72 72 A','2017-12-15 12:30:00','Sneezes a lot, doesnt eat or play','High temperature and reddish throat','Feline Flue','Medication','WT 72 72 72 A','CY 10 60 11 A',0.7);
 insert into diagnosis_code values('FLFLU','Feline Flu');
@@ -198,52 +192,39 @@ insert into prescription values('FLFLU','Francis','WT 72 72 72 A','2017-12-15 12
 insert into prescription values('FLFLU','Francis','WT 72 72 72 A','2017-12-15 12:30:00','Ibuprofen','Mistic','35mg','12/12h until next consult');
 insert into consult_diagnosis values('FLFLU','Francis','WT 72 72 72 A','2018-06-08 10:00:00');	
 
-
-
 insert into consult values('Minnie','WT 72 72 72 A','2018-06-08 10:30:00','Large belly','Eco shows 3 fetus','Pregnant','No action required','WT 72 72 72 A','EA 24 06 86',2.6);
 insert into procedure_ values ('Minnie','WT 72 72 72 A','2018-06-08 10:30:00',2,'Abdominal Eco');
 insert into radiography values ('Minnie','WT 72 72 72 A','2018-06-08 10:30:00',2,'C:Ecos');
 
-
-
 insert into consult values('Luna','YL 71 92 45 B','2018-05-12 14:00:00','Nothing in particular','No indication of problems','Healthy','Annual vaccination','YL 71 92 45 B','EA 24 06 86',14);
 insert into consult values('Luna','YL 71 92 45 B','2018-08-26 10:30:00','Nothing in particular','No indication of problems','Healthy','Annual vaccination','YL 71 92 45 B','EA 24 06 86',13);	
 
-
-
 insert into consult values('Bob','GS 14 83 38 A','2017-10-12 17:45:00','Nothing in particular','No indication of problems','Healthy','No action required','GS 14 83 38 A','EA 24 06 86',0.8);	
 insert into consult values('Bob','GS 14 83 38 A','2018-02-25 17:00:00','Found outdoors, appears lost','No indication of problems','Healthy','No action required','ZJ 17 07 20','EA 24 06 86',0.7);
-
-
 
 insert into consult values('Oreo','EM 97 43 84','2018-06-10 17:00:00','Sneezes a lot, doesnt eat or play','High temperature and reddish throat','Feline Flue','Medication','EM 97 43 84','CY 10 60 11 A',4);
 insert into prescription values('FLFLU','Oreo','EM 97 43 84','2018-06-10 17:00:00','Paracetemol','Dayer','100mg','12/12h until next consult');
 insert into prescription values('FLFLU','Oreo','EM 97 43 84','2018-06-10 17:00:00','Ibuprofen','Mistic','35mg','12/12h until next consult');		
 insert into consult_diagnosis values('FLFLU','Oreo','EM 97 43 84','2018-06-10 17:00:00');
 
-
-
 insert into consult values('Oscar','NH 08 51 10','2018-04-14 15:00:00','Looks fat and is unable to jump','Obese','high weight and fat','Medication, meal cut and excercise','NH 08 51 10','EA 24 06 86',40.2);
 insert into consult values('Oscar','NH 08 51 10','2018-08-14 15:00:00','Nothing in particular','No indication of problems','Healthy','No action required','NH 08 51 10','EA 24 06 86',28.2);
 
-
-
 insert into consult values('Odie','CB 46 16 95 B','2018-01-30 17:45:00','Nothing in particular','No indication of problems','Healthy','No action required','CB 46 16 95 B','EA 24 06 86',10);
-
-
 
 insert into consult values('Garfield','CB 46 16 95 B','2018-01-31 18:00:00','Looks fat and is unable to jump','Obese','High weight and fat percentage','Medication, meal cut and excercise','NH 08 51 10','EA 24 06 86',6.2);
 insert into consult_diagnosis values ('DIBT','Garfield','CB 46 16 95 B','2018-01-31 18:00:00');
 
-
-
 insert into consult values ('Shiro', 'EA 24 06 86', '2018-01-30 17:45:00', 'Nothing in particular', 'No indication of problems', 'Healthy', 'No action required', 'EA 24 06 86', 'CY 10 60 11 A', 8);
 
-
-insert into consult values('Luna','YL 71 92 45 B','2018-10-07 17:00:00','Tail injury due a fight','Lose a big quantity of blood','Broken tail','Medication','ZJ 17 07 20','EA 24 06 86',0.7);
+-- Add 2 same diagnosis for the dog Luna (To validate query 7)
+insert into consult values('Luna','YL 71 92 45 B','2018-10-07 17:00:00','Tail injury due a fight','Lose a big quantity of blood','Broken tail','Medication','YL 71 92 45 B','EA 24 06 86', 28.2);
 insert into prescription values('BRKTAIL','Luna','YL 71 92 45 B','2018-10-07 17:00:00','Paracetemol','Dayer','100mg','12/12h until next consult');
 insert into consult_diagnosis values('BRKTAIL','Luna','YL 71 92 45 B','2018-10-07 17:00:00');
 
-insert into consult values('Luna','YL 71 92 45 B','2018-11-07 17:00:00','Check tail injury due a fight','Still lose a big quantity of blood','Broken tail','Medication','ZJ 17 07 20','EA 24 06 86',0.7);
+insert into consult values('Luna','YL 71 92 45 B','2018-11-07 17:00:00','Check tail injury due a fight','Still lose a big quantity of blood','Broken tail','Medication','YL 71 92 45 B','EA 24 06 86', 28.2);
 insert into prescription values('BRKTAIL','Luna','YL 71 92 45 B','2018-11-07 17:00:00','Paracetemol','Dayer','100mg','12/12h until next consult');
 insert into consult_diagnosis values('BRKTAIL','Luna','YL 71 92 45 B','2018-11-07 17:00:00');
+
+-- Add a recent consult with weight > 30 without %obese% or %obesity%
+insert into consult values ('Luna', 'YL 71 92 45 B', '2018-11-08 17:45:00', 'Nothing in particular', 'No indication of problems', 'Healthy', 'No action required', 'YL 71 92 45 B', 'CY 10 60 11 A', 30.1);
