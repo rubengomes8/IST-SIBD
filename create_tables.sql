@@ -98,7 +98,8 @@ create table consult (
 	primary key(name, VAT_owner, date_timestamp),
 	foreign key(name, VAT_owner) references animal(name,VAT) on delete cascade,
 	foreign key(VAT_client) references client(VAT) on delete cascade, 
-	foreign key(VAT_vet) references veterinary(VAT) on delete cascade
+	foreign key(VAT_vet) references veterinary(VAT) on delete cascade,
+	check(weight>0)
 );
 
 create table participation (
