@@ -15,7 +15,7 @@ on animal(VAT);
 
 --**2**
 
-create nonclustered index ind_units
+create index ind_units
 on indicator(units);
 
 

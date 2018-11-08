@@ -13,31 +13,35 @@ create view dim_date as
 --animal_name,animal_vat: FK(animal)
 
 create view dim_animal as 
-	(select animal.name as animal_name, animal.VAT as animal_vat, animal.species_name as species, animal.age as age from animal)
+	(select animal.name as animal_name, animal.VAT as animal_vat, animal.species_name as species, animal.age as age from animal);
+
+
+
 
 --facts_consults(name,vat,timestamp,num_procedures,num_medications)
 --name,vat: FK(dim_animal)
 --timestamp: FK(dim_date)
 
-create view facts_consults as
-	(select da.name as name, da.VAT as vat, dd.date_timestamp as timestamp, tp.num as num_procedures, p.name_med as num_medications
-	 from dim_animal da,dim_date dd inner join prescription p inner join test_procedure tp
-	 on  p.date_timestamp = dd.date_timestamp
-	 where p.name = da.name
-	 and tp.name = p.name);
-	 
-create view facts_consults as
-	(select da.name as name, da.VAT as vat, dd.date_timestamp as timestamp, tp.num as num_procedures, p.name_med as num_medications
-	 from dim_animal da, dim_date dd, prescription p, test_procedure tp
-	 where dd.date_timestamp = p.date_timestamp 
-	 and tp.date_timestamp = p.date_timestamp
-	 and tp.name = da.name
-	 and da.animal_vat = tp.VAT_owner
-	 and tp.name = p.name
-	 and tp.VAT_owner = p.VAT_owner
-	 and tp.date_timestamp = p.date_timestamp
-	 and tp.num = p.num);
-	 
+create view prc_tbl as (select da.animal_name, da.animal_vat, dd.date_timestamp,count(prc.num) as procedures
+from dim_date dd natural join procedure_ prc inner join dim_animal as da
+where prc.name = da.animal_name and prc.VAT_owner = da.animal_vat
+group by dd.date_timestamp);
+
+
+create view prs_tbl as (select da.animal_name, da.animal_vat, dd.date_timestamp,count(prs.name_med) as medications
+from dim_date dd natural join prescription prs inner join dim_animal as da
+where prs.name = da.animal_name and prs.VAT_owner = da.animal_vat
+group by dd.date_timestamp);
+
+
+create view facts_consults as 
+select prc_tbl.animal_name, prc_tbl.animal_vat, prc_tbl.date_timestamp, procedures, medications
+from prc_tbl left join prs_tbl
+on prc_tbl.animal_name= prs_tbl.animal_name and prc_tbl.animal_vat= prs_tbl.animal_vat and prc_tbl.date_timestamp = prs_tbl.date_timestamp
+union
+select prs_tbl.animal_name, prs_tbl.animal_vat, prs_tbl.date_timestamp, procedures, medications
+from  prc_tbl right join prs_tbl
+on prc_tbl.animal_name= prs_tbl.animal_name and prc_tbl.animal_vat= prs_tbl.animal_vat and prc_tbl.date_timestamp = prs_tbl.date_timestamp;
 	 
 
 
@@ -46,3 +50,14 @@ create view facts_consults as
 --records in the database (i.e., information on all the animals that had
 --consults, together with the associated number of procedures and number
 --of prescribed medications). 
+
+
+
+
+
+
+
+
+
+
+

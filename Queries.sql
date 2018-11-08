@@ -39,37 +39,24 @@ select name, reference_value from indicator
 --of any SOAP note, associated to consults of that animal, mentions
 --terms like obesity or obese.
 
+
 select animal.name, person.name, species_name, age from animal inner join person
-where
-exists(
+where exists(
 select distinct c1.name, date_timestamp from consult c1
-where date_timestamp = 
-(select max(date_timestamp) from consult c2 where c1.name = c2.name and c1.VAT_owner = c2.VAT_owner)
+where date_timestamp = (select max(date_timestamp) from consult c2 where c1.name = c2.name and c1.VAT_owner = c2.VAT_owner)
 and c1.weight > 30
-and c1.o like '%obese%' or c1.o like '%obesity%'
 and c1.VAT_owner = animal.VAT
-and c1.VAT_owner = person.VAT);
+and c1.VAT_owner = person.VAT)
+
+and exists(
+select c2.name from consult c2
+where c2.o like '%obese%' or c2.o like '%obesity%'
+and c2.VAT_owner = animal.VAT
+and c2.VAT_owner = person.VAT);
 
 
 
-select animal.name, person.name, species_name, age from person, client , animal, consult c
-where person.VAT = client.VAT 
-and client.VAT = animal.VAT 
-and animal.VAT = c.VAT_owner and animal.name = c.name
-and (c.o like '%obese%' or c.o like '%obesity%')
-and exists( 
-select distinct c1.name, c1.VAT_owner, c1.date_timestamp from consult c1 
-where c1.date_timestamp = 
-(select max(date_timestamp) from consult c2 
- where c1.name = c2.name and c1.VAT_owner = c2.VAT_owner 
- and c1.date_timestamp = c2.date_timestamp 
- and c1.weight > 30)	
-and c1.VAT_owner = animal.VAT
-and c1.name = animal.name
-and c.name = c1.name 
-and c.VAT_owner = c1.VAT_owner
-and c.date_timestamp = c1.date_timestamp);
-
+    	
 --convem adicionar uma consulta recente com peso > 30 mas sem obesidades
 
 
@@ -155,9 +142,5 @@ where exists(
                     and a2.VAT = animal.VAT
             )
     );
-
-
---Renato: Achamos que falta um pormenor, porque se o species_name fôr papagaio, não vai aparecer, mas é um bird
---(Tem aqui a questão de a key ser dupla e nao sei muito bem se é "animal.name,animal.VAT not in")
 
 	

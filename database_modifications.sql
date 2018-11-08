@@ -41,6 +41,6 @@ insert into diagnosis_code values('RENDES','End-Stage renal disease');
 update consult_diagnosis as cd
 set cd.code = 'RENDES'
 where exists (
-select * from produced_indicator as pi
-where pi.indicator_name = 'Creatinine level' and pi.value > 1.0
-and pi.name = cd.name and pi.VAT_owner = cd.VAT_owner and pi.date_timestamp = cd.date_timestamp);
+select * from produced_indicator pi natural join test_procedure tp natural join procedure_ p
+where pi.indicator_name = 'Creatinine level' and pi.value > 1.0 and tp.type = 'blood'
+and p.name = cd.name and p.VAT_owner = cd.VAT_owner and p.date_timestamp = cd.date_timestamp);
