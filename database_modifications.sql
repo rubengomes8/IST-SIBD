@@ -1,7 +1,7 @@
  --**1** Change the address of the client named John Smith, to a different city and street of your choice.
  
 update person
-set person.adress_city = 'Croydon'
+set person.address_city = 'Croydon'
 and person.address_street = 'Main St'
 and person.name = person.name
 and person.VAT = person.VAT_owner
