@@ -4,7 +4,7 @@ update person
 set person.address_city = 'Croydon'
 and person.address_street = 'Main St'
 and person.name = person.name
-and person.VAT = person.VAT_owner
+and person.VAT = person.VAT
 and person.address_zip = person.address_zip
 where person.name = 'John Smith' and person.VAT in (select client.VAT from client);
 
