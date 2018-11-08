@@ -20,8 +20,11 @@ create view dim_animal as
 --timestamp: FK(dim_date)
 
 create view facts_consults as
-	(select dim_animal.animal__name, dim_animal.animal_vat, time(consult.date_timestamp), count(keydasprocedures), count(keydas medications) 
-	from dim_animal (acabar isto depois)
+	(select da.name as name, da.VAT as VAT, dd.date_timestamp as timestamp, p.name_med as num_medications,tp.num as num_procedures
+	 from dim_animal da,dim_date dd inner join prescription p inner join test_procedure tp
+	 on  p.date_timestamp = dd.date_timestamp
+	 where p.name = da.name
+	 and tp.name = p.name);
 
 
 --Present the SQL code for creating each of the views corresponding to
