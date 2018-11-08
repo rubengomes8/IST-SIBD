@@ -161,7 +161,7 @@ insert into indicator values ('Kidney Enzime 2','150','milligrams','Level of enz
 insert into indicator values ('Creatinine level','0.5','milligrams','Level of creatinine');
 insert into indicator values ('Carnine Enzime','250','picograms','Level of enzimes of Carnine');
 
-insert into produced_indicator values ('Jerry','CB 46 92 95 B','2018-01-25 16:00:00',1,'Poison','9');
+insert into produced_indicator values ('Jerry','CB 46 92 95 B','2018-01-25 16:00:00',4,'Poison','9');
 
 insert into medication values('Tarinum Forte','Dayer','10mg');
 insert into prescription values('POSN','Jerry','CB 46 92 95 B','2018-01-25 16:00:00','Tarinum Forte','Dayer','10mg','12/12h for 5 days IV');
@@ -182,7 +182,7 @@ insert into procedure_ values ('Marley','ZJ 37 07 20','2017-09-08 08:00:00',1,'E
 insert into test_procedure values ('Marley','ZJ 37 07 20','2017-09-08 08:00:00',1,'blood');
 insert into indicator values ('Kidney Enzime','115','milligrams','Level of enzimes of kidney function');
 insert into produced_indicator values ('Marley','ZJ 37 07 20','2017-09-08 08:00:00',1,'Kidney Enzime','2');
-insert into produced_indicator values ('Marley','ZJ 37 07 20','2017-09-08 08:00:00',2,'Creatinine level','2');
+insert into produced_indicator values ('Marley','ZJ 37 07 20','2017-09-08 08:00:00',1,'Creatinine level','2');
 insert into consult_diagnosis values('KDNFLR','Marley','ZJ 37 07 20','2017-09-08 08:00:00');
 insert into participation values ('Marley','ZJ 37 07 20','2018-03-14 10:00:00','CB 46 16 95 B');
 
