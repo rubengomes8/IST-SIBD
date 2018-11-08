@@ -161,7 +161,7 @@ insert into indicator values ('Kidney Enzime 2','150','milligrams','Level of enz
 insert into indicator values ('Creatinine level','0.5','milligrams','Level of creatinine');
 insert into indicator values ('Carnine Enzime','250','picograms','Level of enzimes of Carnine');
 
-insert into produced_indicator values ('Jerry','CB 46 92 95 B','2018-01-25 16:00:00',4,'Poison','9');
+insert into produced_indicator values ('Jerry','CB 46 92 95 B','2018-01-25 16:00:00',1,'Poison','9');
 
 insert into medication values('Tarinum Forte','Dayer','10mg');
 insert into prescription values('POSN','Jerry','CB 46 92 95 B','2018-01-25 16:00:00','Tarinum Forte','Dayer','10mg','12/12h for 5 days IV');
