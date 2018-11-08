@@ -42,5 +42,5 @@ update consult_diagnosis as cd
 set cd.code = 'RENDES'
 where exists (
 select * from produced_indicator as pi
-where pi.indicator_name = 'creatinine level' and pi.value > 1.0
+where pi.indicator_name = 'Creatinine level' and pi.value > 1.0
 and pi.name = cd.name and pi.VAT_owner = cd.VAT_owner and pi.date_timestamp = cd.date_timestamp);
