@@ -6,7 +6,7 @@
 --RI: date_timestamp corresponds to a date existing in consults
 
 create view dim_date as 
-	(select date_timestamp, day(date_timestamp) as day, month(date_timestamp) as month, year(date_timestamp) as year from consult);
+	(select distinct date_timestamp, day(date_timestamp) as day, month(date_timestamp) as month, year(date_timestamp) as year from consult);
 
 
 --dim_animal(animal_name,animal_vat,species,age)
