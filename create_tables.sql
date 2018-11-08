@@ -196,7 +196,8 @@ create table test_procedure (
 	num int, 
 	type varchar(255),
 	primary key(name, VAT_owner, date_timestamp, num),
-	foreign key(name, VAT_owner, date_timestamp, num) references procedure_(name, VAT_owner, date_timestamp, num) on delete cascade
+	foreign key(name, VAT_owner, date_timestamp, num) references procedure_(name, VAT_owner, date_timestamp, num) on delete cascade,
+	check(type = 'blood' or type='urine')
 );
 
 create table produced_indicator (
