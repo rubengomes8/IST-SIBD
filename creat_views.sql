@@ -31,4 +31,4 @@ create view facts_consults as
 --the tables in the previous model, so that the views list the corresponding
 --records in the database (i.e., information on all the animals that had
 --consults, together with the associated number of procedures and number
---of prescribed medications).
+--of prescribed medications). 
