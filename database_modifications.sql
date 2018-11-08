@@ -26,6 +26,8 @@ delete from client
 where client.VAT in (select person.VAT from person
 where person.name = 'John Smith' and person.VAT = client.VAT);
 
+--Shiro é o unico animal do John Smith
+
 
 
 -- **4**. Find the diagnostic code corresponding to kidney failure. Create
