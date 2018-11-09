@@ -33,7 +33,7 @@ group by dd.date_timestamp);
 create view prs_tbl as (select da.animal_name, da.animal_vat, dd.date_timestamp,count(prs.name_med) as medications
 from dim_date dd natural join consult c left outer join prescription prs
 on c.name = prs.name and c.VAT_owner = prs.VAT_owner and c.date_timestamp = prs.date_timestamp
-left join dim_animal as da
+left outer join dim_animal as da
 on c.name = da.animal_name and c.VAT_owner = da.animal_vat
 group by dd.date_timestamp);
 
