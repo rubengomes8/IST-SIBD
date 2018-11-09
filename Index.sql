@@ -14,8 +14,6 @@ create index vet_person
 on veterinary(VAT);
 
 
---Indexar estas tabelas acelera o processo de join nas query.
-
 --**2**
 
 create index ind_units
