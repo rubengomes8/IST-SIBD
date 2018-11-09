@@ -53,4 +53,5 @@ where pi.indicator_name = 'Creatinine level' and pi.value > 1.0
 and pi.name = cd.name and pi.VAT_owner = cd.VAT_owner 
 and pi.date_timestamp = cd.date_timestamp
 and pr.name = cd.name and pr.VAT_owner = cd.VAT_owner
-and pr.date_timestamp = cd.date_timestamp);
+and pr.date_timestamp = cd.date_timestamp)
+and cd.code = 'KDNFLR';
