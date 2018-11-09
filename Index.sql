@@ -10,6 +10,9 @@ on client(VAT);
 create index animal_client
 on animal(VAT);
 
+create index vet_person
+on veterinary(VAT);
+
 
 --Indexar estas tabelas acelera o processo de join nas query.
 
