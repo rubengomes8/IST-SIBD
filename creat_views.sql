@@ -13,7 +13,7 @@ create view dim_date as
 --animal_name,animal_vat: FK(animal)
 
 create view dim_animal as 
-	(select animal.name as animal_name, animal.VAT as animal_vat, animal.species_name as species, animal.age as age from animal)
+	(select animal.name as animal_name, animal.VAT as animal_vat, animal.species_name as species, animal.age as age from animal);
 
 --facts_consults(name,vat,timestamp,num_procedures,num_medications)
 --name,vat: FK(dim_animal)
