@@ -22,6 +22,7 @@ drop table if exists phone_number;
 drop table if exists client;
 drop table if exists person;
 
+drop view if exists dim_animal, dim_date, facts_consults, prc_tbl, prs_tbl;
 
 
 create table person (
