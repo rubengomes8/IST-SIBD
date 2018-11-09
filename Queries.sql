@@ -13,10 +13,6 @@ select animal.name, person.name, species_name, age from animal inner join client
     and animal.VAT = client.VAT
     and client.VAT=person.VAT;
 
---John Smith.VAT é EA 24 06 86; acho que está bem (Rúben&Renato)
---não se pode fazer natural join a estas tabelas porque os nomes, VATs estão todos misturados e têm valores diferentes 
---entre tabelas!
-
 
 
 --2.(CORRECT) List the name of all indicators measured in milligrams and with a
@@ -30,9 +26,6 @@ select name, reference_value from indicator
         order by reference_value desc;
         
         
---acho que está bem (Rúben&Renato)
-
-
 
 --3.(CORRECT)List the name, owner name, species and age for all animals with the
 --most recent weight above 30 kilograms, and where the objective part
@@ -40,37 +33,18 @@ select name, reference_value from indicator
 --terms like obesity or obese.
 
 select animal.name, person.name, species_name, age from animal inner join person
-where
-exists(
+where exists(
 select distinct c1.name, date_timestamp from consult c1
-where date_timestamp = 
-(select max(date_timestamp) from consult c2 where c1.name = c2.name and c1.VAT_owner = c2.VAT_owner)
+where date_timestamp = (select max(date_timestamp) from consult c2 where c1.name = c2.name and c1.VAT_owner = c2.VAT_owner)
 and c1.weight > 30
-and c1.o like '%obese%' or c1.o like '%obesity%'
 and c1.VAT_owner = animal.VAT
-and c1.VAT_owner = person.VAT);
+and c1.VAT_owner = person.VAT)
 
-
-
-select animal.name, person.name, species_name, age from person, client , animal, consult c
-where person.VAT = client.VAT 
-and client.VAT = animal.VAT 
-and animal.VAT = c.VAT_owner and animal.name = c.name
-and (c.o like '%obese%' or c.o like '%obesity%')
-and exists( 
-select distinct c1.name, c1.VAT_owner, c1.date_timestamp from consult c1 
-where c1.date_timestamp = 
-(select max(date_timestamp) from consult c2 
- where c1.name = c2.name and c1.VAT_owner = c2.VAT_owner 
- and c1.date_timestamp = c2.date_timestamp 
- and c1.weight > 30)	
-and c1.VAT_owner = animal.VAT
-and c1.name = animal.name
-and c.name = c1.name 
-and c.VAT_owner = c1.VAT_owner
-and c.date_timestamp = c1.date_timestamp);
-
---convem adicionar uma consulta recente com peso > 30 mas sem obesidades
+and exists(
+select c2.name from consult c2
+where c2.o like '%obese%' or c2.o like '%obesity%'
+and c2.VAT_owner = animal.VAT
+and c2.VAT_owner = person.VAT);
 
 
 --4.(CORRECT) List the name, VAT and address of all clients of the hospital that are not owners of animals
@@ -79,7 +53,6 @@ select person.name, person.VAT, person.address_street, person.address_city, pers
 where person.VAT = client.VAT and
 client.VAT not in (select animal.VAT from animal);
 
---acho que está bem (Rúben&Renato)
 
 
 --5. (CORRECT) For each possible diagnosis, list the number of distinct medication
@@ -93,7 +66,6 @@ p.code = dc.code
 group by dc.code
 order by count(m.name);
 
---acho que está bem (Rúben&Renato)
 
 --6. (CORRECT) Present the average number of assistants, procedures, diagnostic codes,
 --and prescriptions involved in consults from the year of 2017.
@@ -135,9 +107,7 @@ group by species_name;
 select person.name from person natural join client
     where client.VAT in 
 	    (select veterinary.VAT from veterinary union select assistant.VAT from assistant);
-	    
---acho que está bem (Rúben&Renato) porque todos os owners são clientes!
-	
+	   
 	
 --9.(CORRECT-mas não sei porque) List the names and addresses of clients that only own birds as their
 --pets (i.e., the clients for whom all the owned animals contain the
@@ -155,9 +125,5 @@ where exists(
                     and a2.VAT = animal.VAT
             )
     );
-
-
---Renato: Achamos que falta um pormenor, porque se o species_name fôr papagaio, não vai aparecer, mas é um bird
---(Tem aqui a questão de a key ser dupla e nao sei muito bem se é "animal.name,animal.VAT not in")
 
 	
