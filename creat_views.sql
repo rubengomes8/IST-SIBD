@@ -20,24 +20,14 @@ create view dim_animal as
 --timestamp: FK(dim_date)
 
 create view facts_consults as
-	(select da.name as name, da.VAT as vat, dd.date_timestamp as timestamp, tp.num as num_procedures, p.name_med as num_medications
-	 from dim_animal da,dim_date dd inner join prescription p inner join test_procedure tp
-	 on  p.date_timestamp = dd.date_timestamp
-	 where p.name = da.name
-	 and tp.name = p.name);
-	 
-create view facts_consults as
-	(select da.name as name, da.VAT as vat, dd.date_timestamp as timestamp, tp.num as num_procedures, p.name_med as num_medications
-	 from dim_animal da, dim_date dd, prescription p, test_procedure tp
-	 where dd.date_timestamp = p.date_timestamp 
-	 and tp.date_timestamp = p.date_timestamp
-	 and tp.name = da.name
-	 and da.animal_vat = tp.VAT_owner
-	 and tp.name = p.name
-	 and tp.VAT_owner = p.VAT_owner
-	 and tp.date_timestamp = p.date_timestamp
-	 and tp.num = p.num);
-	 
+(select da.animal_name as name, da.animal_vat as vat, dd.date_timestamp as timestamp, 
+max(p.num) as num_procedures, count(pr.name_med) as num_medications
+from dim_animal da, dim_date dd, procedure_ p, prescription pr, consult c
+where c.name = da.animal_name and c.date_timestamp = dd.date_timestamp 
+and p.date_timestamp = c.date_timestamp and pr.date_timestamp = c.date_timestamp
+group by dd.date_timestamp);
+
+(Se houver algum campo a null não o inclui)
 	 
 
 
