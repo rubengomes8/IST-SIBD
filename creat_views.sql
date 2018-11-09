@@ -19,15 +19,25 @@ create view dim_animal as
 --name,vat: FK(dim_animal)
 --timestamp: FK(dim_date)
 
-create view facts_consults as
-(select da.animal_name as name, da.animal_vat as vat, dd.date_timestamp as timestamp, 
-max(p.num) as num_procedures, count(pr.name_med) as num_medications
-from dim_animal da, dim_date dd, procedure_ p, prescription pr, consult c
-where c.name = da.animal_name and c.date_timestamp = dd.date_timestamp 
-and p.date_timestamp = c.date_timestamp and pr.date_timestamp = c.date_timestamp
+create view prc_tbl as (select da.animal_name, da.animal_vat, dd.date_timestamp,count(prc.num) as procedures
+from dim_date dd natural join procedure_ prc inner join dim_animal as da
+where prc.name = da.animal_name and prc.VAT_owner = da.animal_vat
 group by dd.date_timestamp);
 
-(Se houver algum campo a null não o inclui)
+create view prs_tbl as (select da.animal_name, da.animal_vat, dd.date_timestamp,count(prs.name_med) as medications
+from dim_date dd natural join prescription prs inner join dim_animal as da
+where prs.name = da.animal_name and prs.VAT_owner = da.animal_vat
+group by dd.date_timestamp);
+
+create view facts_consults as 
+select prc_tbl.animal_name, prc_tbl.animal_vat, prc_tbl.date_timestamp, procedures, medications
+from prc_tbl left join prs_tbl
+on prc_tbl.animal_name= prs_tbl.animal_name and prc_tbl.animal_vat= prs_tbl.animal_vat and prc_tbl.date_timestamp = prs_tbl.date_timestamp
+union
+select prs_tbl.animal_name, prs_tbl.animal_vat, prs_tbl.date_timestamp, procedures, medications
+from  prc_tbl right join prs_tbl
+on prc_tbl.animal_name= prs_tbl.animal_name and prc_tbl.animal_vat= prs_tbl.animal_vat and prc_tbl.date_timestamp = prs_tbl.date_timestamp;
+
 	 
 
 
