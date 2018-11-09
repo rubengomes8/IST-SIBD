@@ -139,10 +139,10 @@ insert into consult values('Tom','ZJ 17 07 20','2018-01-05 09:00:00','Tail appea
 
 insert into consult values('Tom','ZJ 17 07 20','2018-02-24 14:00:00','Tom altough disturbed from the presence of the cast, managed to continue normal life','full healing as shown radiography','clear','remove cast','ZJ 17 07 20','EA 24 06 86',1.7);
 insert into diagnosis_code values('BRKTAIL','Broken tail');
-insert into procedure_ values ('Tom','ZJ 17 07 20','2018-02-24 14:00:00',3,'Tail X-Ray');
-insert into radiography values ('Tom','ZJ 17 07 20','2018-02-24 14:00:00',3,'C:x-ray');
+insert into procedure_ values ('Tom','ZJ 17 07 20','2018-02-24 14:00:00',1,'Tail X-Ray');
+insert into radiography values ('Tom','ZJ 17 07 20','2018-02-24 14:00:00',1,'C:x-ray');
 insert into consult_diagnosis values('BRKTAIL','Tom','ZJ 17 07 20','2018-01-05 09:00:00');
-insert into performed values('Tom','ZJ 17 07 20','2018-02-24 14:00:00',3,'SM 62 10 29 D');
+insert into performed values('Tom','ZJ 17 07 20','2018-02-24 14:00:00',1,'SM 62 10 29 D');
 insert into medication values('Paracetemol','Dayer','100mg');
 insert into prescription values('BRKTAIL','Tom','ZJ 17 07 20','2018-02-24 14:00:00','Paracetemol','Dayer','100mg','12/12h');
 
@@ -153,15 +153,15 @@ insert into consult values('Bob','ZJ 17 07 20','2018-05-30 14:00:00','Nothing of
 insert into consult values('Jerry','CB 46 92 95 B','2018-01-05 10:00:00','Jerry doesnt want to eat and remains still all the time','urinanalysis shows presence of toxin','poisioning','admission to clinic and surveillance','CB 46 92 95 B','EA 24 06 86',0.15);
 insert into consult values('Jerry','CB 46 92 95 B','2018-01-25 16:00:00','Jerry eats and plays','urinanalysis shows no presence of toxin','clear','discharge','CB 46 92 95 B','EA 24 06 86',0.2);
 insert into diagnosis_code values('POSN','Poisoning');
-insert into procedure_ values ('Jerry','CB 46 92 95 B','2018-01-25 16:00:00',4,'Poison');
-insert into test_procedure values ('Jerry','CB 46 92 95 B','2018-01-25 16:00:00',4,'urine');
+insert into procedure_ values ('Jerry','CB 46 92 95 B','2018-01-25 16:00:00',1,'Poison');
+insert into test_procedure values ('Jerry','CB 46 92 95 B','2018-01-25 16:00:00',1,'urine');
 
 insert into indicator values ('Poison','0','picograms','Amount of poison');
 insert into indicator values ('Kidney Enzime 2','150','milligrams','Level of enzimes of kidney function 2');
 insert into indicator values ('Creatinine level','0.5','milligrams','Level of creatinine');
 insert into indicator values ('Carnine Enzime','250','picograms','Level of enzimes of Carnine');
 
-insert into produced_indicator values ('Jerry','CB 46 92 95 B','2018-01-25 16:00:00',4,'Poison','9');
+insert into produced_indicator values ('Jerry','CB 46 92 95 B','2018-01-25 16:00:00',1,'Poison','9');
 
 insert into medication values('Tarinum Forte','Dayer','10mg');
 insert into prescription values('POSN','Jerry','CB 46 92 95 B','2018-01-25 16:00:00','Tarinum Forte','Dayer','10mg','12/12h for 5 days IV');
@@ -189,8 +189,8 @@ insert into participation values ('Marley','ZJ 37 07 20','2018-03-14 10:00:00','
 insert into consult values('Marley','ZJ 37 07 20','2017-06-12 15:00:00','Nothing in particular','No indication of problems','Healthy','Annual vaccination','ZJ 37 07 20','EA 24 06 86',28);
 insert into consult values('Marley','ZJ 37 07 20','2017-09-28 18:00:00','Limps on the left paw','X-ray shows broken limb','Broken paw','Cast','ZJ 37 07 20','CY 10 60 11 A',27);
 insert into diagnosis_code values('BRKPAW','Broken paw');
-insert into procedure_ values ('Marley','ZJ 37 07 20','2017-09-28 18:00:00',5,'paw X-Ray');
-insert into radiography values ('Marley','ZJ 37 07 20','2017-09-28 18:00:00',5,'C:x-ray');
+insert into procedure_ values ('Marley','ZJ 37 07 20','2017-09-28 18:00:00',1,'paw X-Ray');
+insert into radiography values ('Marley','ZJ 37 07 20','2017-09-28 18:00:00',1,'C:x-ray');
 insert into consult_diagnosis values('BRKPAW','Marley','ZJ 37 07 20','2017-06-12 15:00:00');
 
 
@@ -207,8 +207,8 @@ insert into consult_diagnosis values('FLFLU','Francis','WT 72 72 72 A','2018-06-
 
 
 insert into consult values('Minnie','WT 72 72 72 A','2018-06-08 10:30:00','Large belly','Eco shows 3 fetus','Pregnant','No action required','WT 72 72 72 A','EA 24 06 86',2.6);
-insert into procedure_ values ('Minnie','WT 72 72 72 A','2018-06-08 10:30:00',2,'Abdominal Eco');
-insert into radiography values ('Minnie','WT 72 72 72 A','2018-06-08 10:30:00',2,'C:Ecos');
+insert into procedure_ values ('Minnie','WT 72 72 72 A','2018-06-08 10:30:00',1,'Abdominal Eco');
+insert into radiography values ('Minnie','WT 72 72 72 A','2018-06-08 10:30:00',1,'C:Ecos');
 
 
 
@@ -236,8 +236,8 @@ insert into consult values('Oscar','NH 08 51 10','2018-08-14 15:00:00','Nothing 
 
 insert into consult values('Odie','CB 46 16 95 B','2018-01-30 17:45:00','Nothing in particular','No indication of problems','Healthy','No action required','CB 46 16 95 B','EA 24 06 86',10);
 insert into consult values('Odie','CB 46 16 95 B','2017-11-12 18:00:00','Limps on the left paw','X-ray shows broken limb','Broken paw','Cast','CB 46 16 95 B','CY 10 60 11 A',12);
-insert into procedure_ values ('Odie','CB 46 16 95 B','2017-11-12 18:00:00',5,'paw X-Ray');
-insert into radiography values ('Odie','CB 46 16 95 B','2017-11-12 18:00:00',5,'C:x-ray');
+insert into procedure_ values ('Odie','CB 46 16 95 B','2017-11-12 18:00:00',1,'paw X-Ray');
+insert into radiography values ('Odie','CB 46 16 95 B','2017-11-12 18:00:00',1,'C:x-ray');
 insert into consult_diagnosis values('BRKPAW','Odie','CB 46 16 95 B','2017-11-12 18:00:00');
 
 
