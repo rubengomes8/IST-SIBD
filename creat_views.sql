@@ -39,11 +39,11 @@ group by dd.date_timestamp);
 
 
 create view facts_consults as 
-select prc_tbl.animal_name, prc_tbl.animal_vat, prc_tbl.date_timestamp, procedures, medications
+select prc_tbl.animal_name as name, prc_tbl.animal_vat as vat, prc_tbl.date_timestamp as timestamp, procedures as num_procedures, medications as num_medications
 from prc_tbl left join prs_tbl
 on prc_tbl.animal_name= prs_tbl.animal_name and prc_tbl.animal_vat= prs_tbl.animal_vat and prc_tbl.date_timestamp = prs_tbl.date_timestamp
 union
-select prs_tbl.animal_name, prs_tbl.animal_vat, prs_tbl.date_timestamp, procedures, medications
+select prs_tbl.animal_name as name, prs_tbl.animal_vat as vat, prs_tbl.date_timestamp as timestamp, procedures as num_procedures, medications as num_medications
 from  prc_tbl right join prs_tbl
 on prc_tbl.animal_name= prs_tbl.animal_name and prc_tbl.animal_vat= prs_tbl.animal_vat and prc_tbl.date_timestamp = prs_tbl.date_timestamp;
 	 
