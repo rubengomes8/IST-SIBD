@@ -38,9 +38,19 @@ where person.name = 'John Smith' and person.VAT = client.VAT);
 
 
 insert into diagnosis_code values('RENDES','End-Stage renal disease');
-update consult_diagnosis as cd
-set cd.code = 'RENDES'
+update consult_diagnosis as cd, prescription as pr
+set cd.code = 'RENDES',
+cd.name = cd.name,
+cd.VAT_owner = cd.VAT_owner,
+cd.date_timestamp = cd.date_timestamp,
+pr.code = 'KDNFLR',
+pr.name = pr.name,
+pr.VAT_owner = pr.VAT_owner,
+pr.date_timestamp = pr.date_timestamp
 where exists (
 select * from produced_indicator as pi
 where pi.indicator_name = 'Creatinine level' and pi.value > 1.0
-and pi.name = cd.name and pi.VAT_owner = cd.VAT_owner and pi.date_timestamp = cd.date_timestamp);
+and pi.name = cd.name and pi.VAT_owner = cd.VAT_owner 
+and pi.date_timestamp = cd.date_timestamp
+and pr.name = cd.name and pr.VAT_owner = cd.VAT_owner
+and pr.date_timestamp = cd.date_timestamp);
