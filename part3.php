@@ -27,7 +27,7 @@
 	
 	
 	//Queries in MySQL
-	$check_animal_query = "SELECT a.name, p.name, p.VAT FROM animal a, client c, person p WHERE a.VAT = c.VAT and c.VAT = p.VAT where a.name =" . $name_animal . " and a.VAT = " . $selected_animal_vat . " and p.name like '%" . $name_owner_portion ."%';";
+	$check_animal_query = "SELECT a.name, p.name, p.VAT FROM animal a, client c, person p WHERE a.VAT = c.VAT and c.VAT = p.VAT and a.name =" . $name_animal . " and a.VAT = " . $selected_animal_vat . " and p.name like '%" . $name_owner_portion ."%';";
 	$show_animal_consults_query = "SELECT * FROM animal, consult WHERE animal.VAT = consult.VAT_owner and animal.name = consult.name;";
 	$show_consult_info_query = "SELECT * FROM animal a, consult c, consult_diagnosis cd, precription p WHERE a.VAT = c.VAT_owner and a.name = c.name and c.VAT_owner = cd.VAT_owner and c.name = cd.name and cd.date_timestamp = c.date_timestamp and c.VAT_owner = p.VAT_owner and c.name = p.name and p.date_timestamp = c.date_timestamp;" ;
 	
