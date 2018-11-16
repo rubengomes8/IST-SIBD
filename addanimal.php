@@ -1,71 +1,96 @@
 <html>
 		<body>
-<?php
-$host	=	"db.tecnico.ulisboa.pt";
-$user	=	"ist425480";
-$pass	=	"ipnr6905";
-$dsn	=	"mysql:host=$host;dbname=$user";
-try
-{
-$connection	=	new	PDO($dsn,	$user,	$pass);
-}
-catch(PDOException	$exception)
-{
-echo("<p>Error:	");
-echo($exception->getMessage());
-echo("</p>");
-exit();
-}
-$animal_name	=	$_REQUEST['animal_name'];
-$animal_vat	=	$_REQUEST['animal_vat'];
-$owner_name	=	$_REQUEST['owner_name'];
+			<?php
+				$host	=	"db.tecnico.ulisboa.pt";
+				$user	=	"ist425480";
+				$pass	=	"ipnr6905";
+				$dsn	=	"mysql:host=$host;dbname=$user";
+				try
+				{
+					$connection	=	new	PDO($dsn,	$user,	$pass);
+				}
+				catch(PDOException	$exception)
+				{
+					echo("<p>Error:	");
+					echo($exception->getMessage());
+					echo("</p>");
+					exit();
+				}
+				//Information about the owner
+				$owner_name	=	$_REQUEST['owner_name'];
+				$animal_vat	=	$_REQUEST['animal_vat'];
+				$city	=	$_REQUEST['city'];
+				$street	=	$_REQUEST['street'];
+				$zip	=	$_REQUEST['zip'];
+				//Information about the animal
+				$animal_name	=	$_REQUEST['animal_name'];
+				$species_name	=	$_REQUEST['species_name'];
+				$colour	=	$_REQUEST['colour'];
+				$gender	=	$_REQUEST['gender'];
+				$birth_year	=	$_REQUEST['birth_year'];
+				$age	=	$_REQUEST['age'];//should convert this into another integer variable?
 
-//Check if person exists. If not Add a new Person, a new Client and a new animal.
 
-//If exists in person check if exists in client. If not add a client and new animal
 
-//If exists in client add a new animal
 
-$check_animal_query = "SELECT a.name as aname, p.name as pname, p.VAT as vat FROM animal a, client c, person p WHERE a.VAT = c.VAT and c.VAT = p.VAT and a.name ='$animal_name' and a.VAT = '$animal_vat' and p.name like '%$owner_name%';";
-	
+				//Check if person exists. If not Add a new Person, a new Client and a new animal.
+				$check_person = "SELECT * from person WHERE VAT = '$animal_vat';";
+				$add_person = "INSERT into person(VAT, name) values ('$animal_vat', '$owner_name');";
+				$add_client = "INSERT into client values ('$animal_vat');";
+				$add_animal = "INSERT into animal values ('$animal_name','$animal_vat', '$species_name', '$colour', '$gender', '$birth_year', '$age');";
+				echo("<p>Query: " . $check_person . "</p>\n");
+				echo("<p>Query: " . $add_person . "</p>\n");
+				echo("<p>Query: " . $add_client . "</p>\n");
+				echo("<p>Query: " . $add_animal . "</p>\n");
 
-	echo("<p>Query: " . $check_animal_query . "</p>\n");
+				$result = $connection->query($check_person);
 
-	$result = $connection->query($check_animal_query);
-	
-	$num = $result->rowCount();
+				$num_p = $result->rowCount();
 
-	echo("<p>$num records retrieved:</p>\n");
-	
-	//if $num >= 1
-	if($num >= 1){
-		echo("<table border=\"1\">\n");
-		echo("<tr><td>animal</td><td>person</td><td>vat</td></tr>\n");
-		foreach($result as $row)
-		{
-			echo("<tr><td>");
-			echo($row["aname"]);
-			echo("</td><td>");
-			echo($row["pname"]);
-			echo("</td><td>");
-			echo($row["vat"]);
-			echo("</td><td>");
-			echo("<a	href=\"check_consults.php?aname=");
-			echo($row['aname']);
-			echo("&vat=");
-			echo($row['vat']);
-			echo("\">Check consults</a></td>\n");
-			echo("</tr>\n");
-		}
-		echo("</table>\n");
-	} else {
-		//option to add an animal
-		echo("<form	action='addanimal.php'	method='post'>\n <h3>Add a new animal to the database</h3>\n <p>Animal name:	<input	type='text'	name='animal_name'/></p>\n <p>VAT:	<input	type='text'	name='animal_vat'/></p>\n <p>Owner:	<input	type='text'	name='owner_name'/></p>\n <p><input	type='submit'	value='Add new animal'/></p>\n </form>");
-	}
-	
-	
+				echo("<p>$num_p person retrieved:</p>\n");
+				if($num_p == 0){
+					$result = $connection->query($add_person);
+					$result = $connection->query($add_client);
+					$result = $connection->query($add_animal);
+				} else {
+					//If exists in person check if exists in client. If not add a client and new animal
+
+					$check_client = "SELECT * from client WHERE VAT = '$animal_vat';";
+					echo("<p>Query: " . $check_client . "</p>\n");
+
+					$result = $connection->query($check_client);
+
+					$num_c = $result->rowCount();
+
+					echo("<p>$num_c client retrieved:</p>\n");
+					if($num_c == 0 ){
+						$result = $connection->query($add_client);
+						$result = $connection->query($add_animal);	
+					} else {
+						//If exists in client add a new animal
+						$check_animal = "SELECT * from animal WHERE VAT = '$animal_vat' and name = '$animal_name';";
+						echo("<p>Query: " . $check_animal . "</p>\n");
+
+						$result = $connection->query($check_animal);
+
+						$num_a = $result->rowCount();
+						if($num_a == 0 ){
+							$result = $connection->query($add_animal);	
+						}
+					}
+				}
+
+
+				if ($num_p == 0)
+					echo("<h3> New person added to the database\n</h3>");
+				if ($num_c == 0)
+					echo("<h3> New client added to the database\n</h3>");
+				if ($num_a == 0)
+					echo("<h3> New animal added to the database\n</h3>");
+
+				echo("<form	action='checkanimal.php'	method='post'>\n  </p>\n <p><input	type='submit'	value='Go to homepage'/></p>\n </form>");
 				
-	$connection	=	null;
-?>
+				$connection	=	null;
+		?>
 		</body>
 </html>

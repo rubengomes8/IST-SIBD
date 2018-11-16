@@ -7,14 +7,14 @@ $pass	=	"ipnr6905";
 $dsn	=	"mysql:host=$host;dbname=$user";
 try
 {
-$connection	=	new	PDO($dsn,	$user,	$pass);
+	$connection	=	new	PDO($dsn,	$user,	$pass);
 }
 catch(PDOException	$exception)
 {
-echo("<p>Error:	");
-echo($exception->getMessage());
-echo("</p>");
-exit();
+	echo("<p>Error:	");
+	echo($exception->getMessage());
+	echo("</p>");
+	exit();
 }
 $aname	=	$_GET['aname'];
 $vat	=	$_GET['vat'];
@@ -54,7 +54,7 @@ echo("<p>Query: " . $sqll . "</p>\n");
 		echo("</td><td>");
 		echo($row["o"]);
 		echo("</td><td>");
-		echo($row["a"]);
+		echo($row["aa"]);
 		echo("</td><td>");
 		echo($row["p"]);
 		echo("</td><td>");
@@ -77,6 +77,9 @@ echo("<p>Query: " . $sqll . "</p>\n");
 		echo("</tr>\n");
 	}
 	echo("</table>\n");
+
+
+
 $connection	=	null;
 ?>
 				</body>
