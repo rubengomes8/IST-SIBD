@@ -255,3 +255,10 @@ insert into consult_diagnosis values('BRKTAIL','Luna','YL 71 92 45 B','2018-10-0
 insert into consult values('Luna','YL 71 92 45 B','2018-11-07 17:00:00','Check tail injury due a fight','Still lose a big quantity of blood','Broken tail','Medication','ZJ 17 07 20','EA 24 06 86',0.7);
 insert into prescription values('BRKTAIL','Luna','YL 71 92 45 B','2018-11-07 17:00:00','Paracetemol','Dayer','100mg','12/12h until next consult');
 insert into consult_diagnosis values('BRKTAIL','Luna','YL 71 92 45 B','2018-11-07 17:00:00');
+
+-- Indicadores adicionados para a parte 3
+INSERT into indicator values ('white blood cell', '15000','none','number of white blood cells');
+INSERT into indicator values ('neutrophil', '10000','none','number of neutrophils');
+INSERT into indicator values ('lymphocit', '2500','none','number of lymphocits');
+INSERT into indicator values ('monocyt', '10000','none','number of monocytes');
+
