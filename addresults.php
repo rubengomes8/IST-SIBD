@@ -21,10 +21,10 @@
 				$vat	=	$_GET['vat'];
 				$date	=	$_GET['date'];
 
-
+/*
 				echo("<p>Animal name is: $aname");
 				echo("<p>Vat is: $vat");
-				echo("<p>Date is: $date");
+				echo("<p>Date is: $date");*/
 
 				$neutrophils= $_REQUEST['neutrophils'];
 				$lymphocits	= $_REQUEST['lymphocits'];
@@ -34,7 +34,7 @@
 				$num	=	$_REQUEST['num'];
 
 
-				//Insert produced indicator VER DAQUI PARA BAIXO
+				//Insert produced indicator 
 
 				$add_participation = "INSERT Into participation values ('$aname', '$vat','$date', '$VAT_assistant');";
 
