@@ -19,25 +19,29 @@ catch(PDOException	$exception)
 $aname	=	$_GET['aname'];
 $vat	=	$_GET['vat'];
 $date	=	$_GET['date'];
-echo("<p>Aname is: $aname</p>");
-echo("<p>VAT is: $vat</p>");
-echo("<p>VAT is: $date</p>");
-
-$consults_info= "SELECT c.name as name, c.VAT_owner as vatt, c.date_timestamp as date FROM animal a, consult c WHERE a.VAT = c.VAT_owner and a.name = c.name and a.name ='$aname' and a.VAT = '$vat';";
-
-$sqll="Select c.name as name, c.VAT_owner as vatt, c.date_timestamp as datee, c.VAT_client as vc, c.VAT_vet as vv, c.s as s, c.o as o, c.aa as aa, c.p as p, c.weight as wg, a.gender as gd, a.age as ag, cd.code as cde, p.name_med as nm, p.lab as lb, p.dosage as dsg from animal a left outer join consult c on a.VAT = c.VAT_owner and a.name = c.name left outer join consult_diagnosis cd on c.name = cd.name and c.VAT_owner = cd.VAT_owner and c.date_timestamp = cd.date_timestamp left outer join prescription p on p.code = cd.code and p.name = cd.name and p.VAT_owner = cd.VAT_owner and p.date_timestamp = cd.date_timestamp where c.name = '$aname' and c.VAT_owner = '$vat' and c.date_timestamp = '$date';";
-echo("<p>Query: " . $sqll . "</p>\n");
+//echo("<p>Aname is: $aname</p>");
+//echo("<p>VAT is: $vat</p>");
+//echo("<p>VAT is: $date</p>");
 
 
-	$result = $connection->query($sqll);
-	
-	$num = $result->rowCount();
+$sqll = $connection->prepare("Select c.name as name, c.VAT_owner as vatt, c.date_timestamp as datee, c.VAT_client as vc, c.VAT_vet as vv, c.s as s, c.o as o, c.aa as aa, c.p as p, c.weight as wg, a.gender as gd, a.age as ag, cd.code as cde, p.name_med as nm, p.lab as lb, p.dosage as dsg from animal a left outer join consult c on a.VAT = c.VAT_owner and a.name = c.name left outer join consult_diagnosis cd on c.name = cd.name and c.VAT_owner = cd.VAT_owner and c.date_timestamp = cd.date_timestamp left outer join prescription p on p.code = cd.code and p.name = cd.name and p.VAT_owner = cd.VAT_owner and p.date_timestamp = cd.date_timestamp where c.name = :aname and c.VAT_owner = :vat and c.date_timestamp = :date");
 
-	echo("<p>$num records retrieved:</p>\n");
+$sqll->bindParam(':aname', $aname, PDO::PARAM_STR);
+
+$sqll->bindParam(':vat', $vat, PDO::PARAM_STR);
+
+$sqll->bindParam(':date', $date, PDO::PARAM_STR);
+
+$sqll->execute();
+
+$num = $sqll->rowCount();
+
+
+	//echo("<p>$num records retrieved:</p>\n");
 	
 	echo("<table border=\"1\">\n");
 	echo("<tr><td>animal</td><td>vat</td><td>date</td><td>client</td><td>vet</td><td>s</td><td>o</td><td>a</td><td>p</td><td>weight</td><td>gender</td><td>age</td><td>diagnosis</td><td>medication</td><td>lab</td><td>dosage</td></tr>\n");
-	foreach($result as $row)
+	foreach($sqll as $row)
 	{
 		echo("<tr><td>");
 		echo($row["name"]);

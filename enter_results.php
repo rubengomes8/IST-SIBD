@@ -18,11 +18,11 @@ catch(PDOException	$exception)
 }
 
 $aname	=	$_GET['aname'];
-echo("<p> $aname</p>\n");
+//echo("<p> $aname</p>\n");
 $vat	=	$_GET['vat'];
-echo("<p> $vat</p>\n");
+//echo("<p> $vat</p>\n");
 $date	=	$_GET['date'];
-echo("<p> $date</p>\n");
+//echo("<p> $date</p>\n");
 
 
 

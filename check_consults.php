@@ -18,23 +18,25 @@ catch(PDOException	$exception)
 }
 $aname	=	$_GET['aname'];
 $vat	=	$_GET['vat'];
-echo("<p>Aname is: $aname</p>");
-echo("<p>VAT is: $vat</p>");
+//echo("<p>Aname is: $aname</p>");
+//echo("<p>VAT is: $vat</p>");
 
-$show_animal_consults_query = "SELECT c.name as aname, c.VAT_owner as vatt, c.date_timestamp as date FROM animal a, consult c WHERE a.VAT = c.VAT_owner and a.name = c.name and a.name ='$aname' and a.VAT = '$vat';";
-	
-echo("<p>Query: " . $show_animal_consults_query . "</p>\n");
+$show_animal_consults_query = $connection->prepare("SELECT c.name as aname, c.VAT_owner as vatt, c.date_timestamp as date FROM animal a, consult c WHERE a.VAT = c.VAT_owner and a.name = c.name and a.name =:aname and a.VAT = :vat");
+
+	$show_animal_consults_query->bindParam(':aname', $aname, PDO::PARAM_STR);
+
+	$show_animal_consults_query->bindParam(':vat', $vat, PDO::PARAM_STR);
+
+	$show_animal_consults_query->execute();
+
+	$num = $show_animal_consults_query->rowCount();
 
 
-	$result = $connection->query($show_animal_consults_query);
-	
-	$num = $result->rowCount();
-
-	echo("<p>$num records retrieved:</p>\n");
+	//echo("<p>$num records retrieved:</p>\n");
 	
 	echo("<table border=\"1\">\n");
 	echo("<tr><td>animal</td><td>vat</td><td>date</td></tr>\n");
-	foreach($result as $row)
+	foreach($show_animal_consults_query as $row)
 	{
 		echo("<tr><td>");
 		echo($row["aname"]);

@@ -20,9 +20,9 @@
 				$aname	=	$_GET['aname'];
 				$vat	=	$_GET['vat'];
 
-
+/*
 				echo("<p>Animal name is: $aname");
-				echo("<p>Vat is: $vat");
+				echo("<p>Vat is: $vat");*/
 
 				$date	=	$_REQUEST['date'];
 				$s	=	$_REQUEST['s'];
@@ -35,12 +35,22 @@
 				$code	=	$_REQUEST['code'];
 
 				//Insert consult to the database
-				$add_consult = "INSERT into consult values ('$aname','$vat', '$date', '$s', '$o', '$aa', '$p', '$VAT_client', '$VAT_vet', '$weight');";
+				$add_consult = $connection->prepare("INSERT into consult values (:aname,:vat, :datee, :s, :o, :aa, :p, :VAT_client, :VAT_vet, :weight)");
 
-				echo("<p>Query: " . $add_consult . "</p>\n");
+				$add_consult->bindParam(':aname', $aname, PDO::PARAM_STR);
+				$add_consult->bindParam(':vat', $vat, PDO::PARAM_STR);
+				$add_consult->bindParam(':datee', $date, PDO::PARAM_STR);
+				$add_consult->bindParam(':s', $s, PDO::PARAM_STR);
+				$add_consult->bindParam(':o', $o, PDO::PARAM_STR);
+				$add_consult->bindParam(':aa', $aa, PDO::PARAM_STR);
+				$add_consult->bindParam(':p', $p, PDO::PARAM_STR);
+				$add_consult->bindParam(':VAT_client', $VAT_client, PDO::PARAM_STR);
+				$add_consult->bindParam(':VAT_vet', $VAT_vet, PDO::PARAM_STR);
+				$add_consult->bindParam(':weight', $weight, PDO::PARAM_STR);
 
-				$result = $connection->query($add_consult);
-
+				$add_consult->execute();	
+				
+/*
 				//Check if diagnosis code exists in the database (diagnosis_code table).
 				$check_code = "SELECT * from diagnosis_code where code = '$code';";
 				$result = $connection->query($check_code);
@@ -69,8 +79,14 @@
 					echo("<p>Query: " . $add_cd . "</p>\n");
 
 					$result = $connection->query($add_cd);
-				}
-
+				}*/
+				$add_cd = $connection->prepare("INSERT into consult_diagnosis values(:code, :aname, :vat, :datee)");
+				$add_cd->bindParam(':code', $code, PDO::PARAM_STR);
+				$add_cd->bindParam(':aname', $aname, PDO::PARAM_STR);
+				$add_cd->bindParam(':vat', $vat, PDO::PARAM_STR);
+				$add_cd->bindParam(':datee', $date, PDO::PARAM_STR);
+				$add_cd->execute();
+				s
 				echo("<h2> New consult added to the database</h2>");
 				echo("<form	action='checkanimal.php'	method='post'>\n  </p>\n <p><input	type='submit'	value='Go to homepage'/></p>\n </form>");
 				
