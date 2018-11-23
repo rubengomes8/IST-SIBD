@@ -38,49 +38,56 @@ $num = $sqll->rowCount();
 
 
 	//echo("<p>$num records retrieved:</p>\n");
-	
-	echo("<table border=\"1\">\n");
-	echo("<tr><td>animal</td><td>vat</td><td>date</td><td>client</td><td>vet</td><td>s</td><td>o</td><td>a</td><td>p</td><td>weight</td><td>gender</td><td>age</td><td>diagnosis</td><td>medication</td><td>lab</td><td>dosage</td></tr>\n");
-	foreach($sqll as $row)
-	{
-		echo("<tr><td>");
-		echo($row["name"]);
-		echo("</td><td>");
-		echo($row["vatt"]);
-		echo("</td><td>");
-		echo($row["datee"]);
-		echo("</td><td>");
-		echo($row["vc"]);
-		echo("</td><td>");
-		echo($row["vv"]);
-		echo("</td><td>");
-		echo($row["s"]);
-		echo("</td><td>");
-		echo($row["o"]);
-		echo("</td><td>");
-		echo($row["aa"]);
-		echo("</td><td>");
-		echo($row["p"]);
-		echo("</td><td>");
-		echo($row["wg"]);
-		echo("</td><td>");
-		echo($row["gd"]);
-		echo("</td><td>");
-		echo($row["ag"]);
-		echo("</td><td>");
-		echo($row["cde"]);
-		echo("</td><td>");
-		echo($row["nm"]);
-		echo("</td><td>");
-		echo($row["lb"]);
-		echo("</td><td>");
-		echo($row["dsg"]);
-		
+	if($num >= 1){
+		echo("<table border=\"1\">\n");
+		echo("<tr><td>animal</td><td>vat</td><td>date</td><td>client</td><td>vet</td><td>s</td><td>o</td><td>a</td><td>p</td><td>weight</td><td>gender</td><td>age</td><td>diagnosis</td><td>medication</td><td>lab</td><td>dosage</td></tr>\n");
+		foreach($sqll as $row)
+		{
+			echo("<tr><td>");
+			echo($row["name"]);
+			echo("</td><td>");
+			echo($row["vatt"]);
+			echo("</td><td>");
+			echo($row["datee"]);
+			echo("</td><td>");
+			echo($row["vc"]);
+			echo("</td><td>");
+			echo($row["vv"]);
+			echo("</td><td>");
+			echo($row["s"]);
+			echo("</td><td>");
+			echo($row["o"]);
+			echo("</td><td>");
+			echo($row["aa"]);
+			echo("</td><td>");
+			echo($row["p"]);
+			echo("</td><td>");
+			echo($row["wg"]);
+			echo("</td><td>");
+			echo($row["gd"]);
+			echo("</td><td>");
+			echo($row["ag"]);
+			echo("</td><td>");
+			echo($row["cde"]);
+			echo("</td><td>");
+			echo($row["nm"]);
+			echo("</td><td>");
+			echo($row["lb"]);
+			echo("</td><td>");
+			echo($row["dsg"]);
+			
 
-	
-		echo("</tr>\n");
+		
+			echo("</tr>\n");
+		}
+		echo("</table>\n");
+	} else {
+		echo("<h3> This animal does not have any consult registered. </h3>\n");
 	}
-	echo("</table>\n");
+
+	echo("<h3>Check the existence of another animal</h3>");
+	echo("<form	action='checkanimal.php'	method='post'>\n  </p>\n <p><input	type='submit'	value='Go to homepage'/></p>\n </form>");
+	
 
 
 

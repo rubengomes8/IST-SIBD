@@ -18,8 +18,12 @@
 				}
 
 				//Information about the animal
-				$animal_vat	=	$_REQUEST['animal_vat'];
-				$animal_name	=	$_REQUEST['animal_name'];
+				//$animal_vat	=	$_REQUEST['animal_vat'];
+				//$animal_name	=	$_REQUEST['animal_name'];
+				$animal_vat	=	$_GET['vat'];
+				$animal_name	=	$_GET['aname'];
+
+
 				$species_name	=	$_REQUEST['species_name'];
 				$colour	=	$_REQUEST['colour'];
 				$gender	=	$_REQUEST['gender'];
@@ -40,7 +44,7 @@
 
 
 				$num_a = $check_animal->rowCount();
-				echo("<p> $num_a retrieved.</p>");
+				//echo("<p> $num_a retrieved.</p>");
 				if($num_a == 0 ){
 					//Add a new animal.
 					$add_animal = $connection->prepare("INSERT into animal values (:animal_name, :animal_vat, :species_name, :colour, :gender, :birth_year, :age)");
@@ -55,12 +59,18 @@
 					$add_animal->execute();				
 					
 					echo("<h3> New animal added to the database\n</h3>");
+
+			
 				} else {
-					echo("<h3> Already in the database\n</h3>");
+					echo("<h3> This animal is already in the database</h3>");
+
+					echo("<p> Check consults of this animal</p>");
+
+					echo("<form	action='check_consults.php?aname=$animal_name&vat=$animal_vat'	method='post'>\n  </p>\n <p><input	type='submit'	value='Check consults'/></p>\n </form>");
 				}
 
 					
-
+				echo("<h3>Check the existence of another animal</h3>");
 				echo("<form	action='checkanimal.php'	method='post'>\n  </p>\n <p><input	type='submit'	value='Go to homepage'/></p>\n </form>");
 				
 				$connection	=	null;

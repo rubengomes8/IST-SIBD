@@ -20,35 +20,61 @@
 				$aname	=	$_GET['aname'];
 				$vat	=	$_GET['vat'];
 
-/*
-				echo("<p>Animal name is: $aname");
-				echo("<p>Vat is: $vat");*/
+
+				//echo("<p>Animal name is: $aname");
+				//echo("<p>Vat is: $vat");
 
 				$date	=	$_REQUEST['date'];
 				$s	=	$_REQUEST['s'];
 				$o	=	$_REQUEST['o'];
 				$aa	=	$_REQUEST['aa'];
 				$p	=	$_REQUEST['p'];
-				$VAT_client	=	$_REQUEST['VAT_client'];
 				$VAT_vet	=	$_REQUEST['VAT_vet'];
 				$weight	=	$_REQUEST['weight'];
 				$code	=	$_REQUEST['code'];
 
-				//Insert consult to the database
-				$add_consult = $connection->prepare("INSERT into consult values (:aname,:vat, :datee, :s, :o, :aa, :p, :VAT_client, :VAT_vet, :weight)");
+				//Verify existence of the consult with that key
+				$check_consult = $connection->prepare("SELECT * from consult where name = :name and VAT_owner = :vat_owner and date_timestamp = :dateee");
 
-				$add_consult->bindParam(':aname', $aname, PDO::PARAM_STR);
-				$add_consult->bindParam(':vat', $vat, PDO::PARAM_STR);
-				$add_consult->bindParam(':datee', $date, PDO::PARAM_STR);
-				$add_consult->bindParam(':s', $s, PDO::PARAM_STR);
-				$add_consult->bindParam(':o', $o, PDO::PARAM_STR);
-				$add_consult->bindParam(':aa', $aa, PDO::PARAM_STR);
-				$add_consult->bindParam(':p', $p, PDO::PARAM_STR);
-				$add_consult->bindParam(':VAT_client', $VAT_client, PDO::PARAM_STR);
-				$add_consult->bindParam(':VAT_vet', $VAT_vet, PDO::PARAM_STR);
-				$add_consult->bindParam(':weight', $weight, PDO::PARAM_STR);
+				$check_consult->bindParam(':name', $aname, PDO::PARAM_STR);
+				$check_consult->bindParam(':vat_owner', $vat, PDO::PARAM_STR);
+				$check_consult->bindParam(':dateee', $date, PDO::PARAM_STR);
 
-				$add_consult->execute();	
+				$check_consult->execute();
+				$num_c = $check_consult->rowCount();
+				if($num_c == 0){
+					//Insert consult to the database
+					$add_consult = $connection->prepare("INSERT into consult values (:aname,:vat, :datee, :s, :o, :aa, :p, :VAT_client, :VAT_vet, :weight)");
+
+					$add_consult->bindParam(':aname', $aname, PDO::PARAM_STR);
+					$add_consult->bindParam(':vat', $vat, PDO::PARAM_STR);
+					$add_consult->bindParam(':datee', $date, PDO::PARAM_STR);
+					$add_consult->bindParam(':s', $s, PDO::PARAM_STR);
+					$add_consult->bindParam(':o', $o, PDO::PARAM_STR);
+					$add_consult->bindParam(':aa', $aa, PDO::PARAM_STR);
+					$add_consult->bindParam(':p', $p, PDO::PARAM_STR);
+					$add_consult->bindParam(':VAT_client', $vat, PDO::PARAM_STR);
+					$add_consult->bindParam(':VAT_vet', $VAT_vet, PDO::PARAM_STR);
+					$add_consult->bindParam(':weight', $weight, PDO::PARAM_STR);
+
+					$add_consult->execute();
+
+					//--------------------------------------------------------------------------------------------------
+					$add_cd = $connection->prepare("INSERT into consult_diagnosis values(:code, :aname, :vat, :datee)");
+
+					$add_cd->bindParam(':code', $code, PDO::PARAM_STR);
+					$add_cd->bindParam(':aname', $aname, PDO::PARAM_STR);
+					$add_cd->bindParam(':vat', $vat, PDO::PARAM_STR);
+					$add_cd->bindParam(':datee', $date, PDO::PARAM_STR);
+
+					$add_cd->execute();	
+
+					echo("<h3> New consult added to the database</h3>");
+				} else {
+					echo("<h3> Impossible to add this consult</h3>");
+				}
+
+				
 				
 /*
 				//Check if diagnosis code exists in the database (diagnosis_code table).
@@ -80,14 +106,15 @@
 
 					$result = $connection->query($add_cd);
 				}*/
-				$add_cd = $connection->prepare("INSERT into consult_diagnosis values(:code, :aname, :vat, :datee)");
-				$add_cd->bindParam(':code', $code, PDO::PARAM_STR);
-				$add_cd->bindParam(':aname', $aname, PDO::PARAM_STR);
-				$add_cd->bindParam(':vat', $vat, PDO::PARAM_STR);
-				$add_cd->bindParam(':datee', $date, PDO::PARAM_STR);
-				$add_cd->execute();
-				s
-				echo("<h2> New consult added to the database</h2>");
+				
+				
+				//FALTA VERIICA PRIMEIRO SE EXISTE JA CONSULTA COM ESTA KEY PARA NAO REPETIR
+				
+
+				echo("<p> Check consults of this animal</p>");
+				echo("<form	action='check_consults.php?aname=$aname&vat=$vat'	method='post'>\n  </p>\n <p><input	type='submit'	value='Check consults'/></p>\n </form>");
+
+				echo("<h3>Check the existence of another animal</h3>");
 				echo("<form	action='checkanimal.php'	method='post'>\n  </p>\n <p><input	type='submit'	value='Go to homepage'/></p>\n </form>");
 				
 				$connection	=	null;

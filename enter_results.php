@@ -1,4 +1,4 @@
-<html>
+ <html>
 		<body>
 <?php
 $host	=	"db.tecnico.ulisboa.pt";

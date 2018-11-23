@@ -29,60 +29,116 @@
 				$neutrophils= $_REQUEST['neutrophils'];
 				$lymphocits	= $_REQUEST['lymphocits'];
 				$monocytes	=	$_REQUEST['monocytes'];
-				$white_blood_cells	=	$_REQUEST['white_blood_cells'];
+				$white_blood_cells	=	$_REQUEST['white_blood_cell'];
 				$VAT_assistant	=	$_REQUEST['VAT_assistant'];
 				$num	=	$_REQUEST['num'];
 
 
-				//Insert produced indicator 
 
-				$add_participation = "INSERT Into participation values ('$aname', '$vat','$date', '$VAT_assistant');";
 
-				$add_procedure = "INSERT into procedure_ values ('$aname', '$vat','$date', '$num', 'Blood test');";
-
-				$add_performed = "INSERT into performed values ('$aname', '$vat','$date', '$num', '$VAT_assistant');";
-
-				$add_testprocedure = "INSERT into test_procedure values ('$aname', '$vat','$date', '$num', 'Blood');";
-
-				$add_neutrophils = "INSERT into produced_indicator values ('$aname', '$vat','$date', '$num','neutrophil','$neutrophils');";
-
-				$add_lymphocits = "INSERT into produced_indicator values ('$aname', '$vat','$date', '$num','lymphocit','$lymphocits');";
-
-				$add_monocytes = "INSERT into produced_indicator values ('$aname', '$vat','$date', '$num','monocyt','$monocytes');";
-
-				$add_white_blood_cells = "INSERT into produced_indicator values ('$aname', '$vat','$date', '$num','white_blood_cell','$white_blood_cells');";
-
+				//---------------------------------
 				$connection->beginTransaction();
-				echo("<p> $add_participation</p>\n");
-				$connection->exec($add_participation);
 
-				echo("<p> $add_procedure</p>\n");
-				$connection->exec($add_procedure);
+				$add_participation = $connection->prepare("INSERT Into participation values (:aname, :vat, :datee, :VAT_assistant)");
+				
+				$add_participation->bindParam(':aname', $aname, PDO::PARAM_STR);
+				$add_participation->bindParam(':vat', $vat, PDO::PARAM_STR);
+				$add_participation->bindParam(':datee', $date, PDO::PARAM_STR);
+				$add_participation->bindParam(':VAT_assistant', $VAT_assistant, PDO::PARAM_STR);
 
-				echo("<p> $add_performed</p>\n");
-				$connection->exec($add_performed);
+				$add_participation->execute();
+				
+				//--
 
-				echo("<p> $add_testprocedure</p>\n");
-				$connection->exec($add_testprocedure);
+				$add_procedure = $connection->prepare("INSERT into procedure_ values (:aname, :vat,:datee, :num, 'Blood test')");
 
-				echo("<p> $add_neutrophils</p>\n");
-				$connection->exec($add_neutrophils);
+				$add_procedure->bindParam(':aname', $aname, PDO::PARAM_STR);
+				$add_procedure->bindParam(':vat', $vat, PDO::PARAM_STR);
+				$add_procedure->bindParam(':datee', $date, PDO::PARAM_STR);
+				$add_procedure->bindParam(':num', $num, PDO::PARAM_INT);
 
-				echo("<p> $add_lymphocits</p>\n");
-				$connection->exec($add_lymphocits);
+				$add_procedure->execute();
 
-				echo("<p> $add_monocytes</p>\n");
-				$connection->exec($add_monocytes);
+				//--
+				
 
-				echo("<p> $add_white_blood_cells</p>\n");
-				$connection->exec($add_white_blood_cells);
+				$add_performed = $connection->prepare("INSERT into performed values (:aname, :vat,:datee, :num, :VAT_assistant)");
 
+				$add_performed->bindParam(':aname', $aname, PDO::PARAM_STR);
+				$add_performed->bindParam(':vat', $vat, PDO::PARAM_STR);
+				$add_performed->bindParam(':datee', $date, PDO::PARAM_STR);
+				$add_performed->bindParam(':num', $num, PDO::PARAM_INT);
+				$add_performed->bindParam(':VAT_assistant', $VAT_assistant, PDO::PARAM_STR);
+
+				$add_performed->execute();
+				
+				//--
+
+				$add_testprocedure = $connection->prepare("INSERT into test_procedure values (:aname, :vat,:datee, :num, 'Blood')");
+
+				$add_testprocedure->bindParam(':aname', $aname, PDO::PARAM_STR);
+				$add_testprocedure->bindParam(':vat', $vat, PDO::PARAM_STR);
+				$add_testprocedure->bindParam(':datee', $date, PDO::PARAM_STR);
+				$add_testprocedure->bindParam(':num', $num, PDO::PARAM_INT);
+				$add_testprocedure->bindParam(':VAT_assistant', $VAT_assistant, PDO::PARAM_STR);
+
+				$add_testprocedure->execute();
+
+				//--
+
+				$add_neutrophils = $connection->prepare("INSERT into produced_indicator values (:aname, :vat,:datee, :num,'neutrophil',:neutrophils)");
+
+				$add_neutrophils->bindParam(':aname', $aname, PDO::PARAM_STR);
+				$add_neutrophils->bindParam(':vat', $vat, PDO::PARAM_STR);
+				$add_neutrophils->bindParam(':datee', $date, PDO::PARAM_STR);
+				$add_neutrophils->bindParam(':num', $num, PDO::PARAM_INT);
+				$add_neutrophils->bindParam(':neutrophils', $neutrophils, PDO::PARAM_STR);
+
+				$add_neutrophils->execute();
+
+				//--
+
+				$add_lymphocits = $connection->prepare("INSERT into produced_indicator values (:aname, :vat,:datee, :num,'lymphocit',:lymphocits)");
+
+				$add_lymphocits->bindParam(':aname', $aname, PDO::PARAM_STR);
+				$add_lymphocits->bindParam(':vat', $vat, PDO::PARAM_STR);
+				$add_lymphocits->bindParam(':datee', $date, PDO::PARAM_STR);
+				$add_lymphocits->bindParam(':num', $num, PDO::PARAM_INT);
+				$add_lymphocits->bindParam(':lymphocits', $lymphocits, PDO::PARAM_STR);
+
+				$add_lymphocits->execute();
+
+				//--
+
+				$add_monocytes = $connection->prepare("INSERT into produced_indicator values (:aname, :vat,:datee, :num,'monocyt',:monocytes)");
+
+				$add_monocytes->bindParam(':aname', $aname, PDO::PARAM_STR);
+				$add_monocytes->bindParam(':vat', $vat, PDO::PARAM_STR);
+				$add_monocytes->bindParam(':datee', $date, PDO::PARAM_STR);
+				$add_monocytes->bindParam(':num', $num, PDO::PARAM_INT);
+				$add_monocytes->bindParam(':monocytes', $monocytes, PDO::PARAM_STR);
+
+				$add_monocytes->execute();
+
+				//--
+
+				$add_white_blood_cells = $connection->prepare("INSERT into produced_indicator values (:aname, :vat,:datee, :num,'white blood cell',:white_blood_cells)");
+
+				$add_white_blood_cells->bindParam(':aname', $aname, PDO::PARAM_STR);
+				$add_white_blood_cells->bindParam(':vat', $vat, PDO::PARAM_STR);
+				$add_white_blood_cells->bindParam(':datee', $date, PDO::PARAM_STR);
+				$add_white_blood_cells->bindParam(':num', $num, PDO::PARAM_INT);
+				$add_white_blood_cells->bindParam(':white_blood_cells', $white_blood_cells, PDO::PARAM_STR);
+
+				$add_white_blood_cells->execute();
 
 				$connection->commit();
-				echo("<p>Results entered successfully!</p>");
+
+				echo("<h3>Results entered successfully!</h3>");
 
 
-								
+				echo("<h3>Check the existence of another animal</h3>");
+				echo("<form	action='checkanimal.php'	method='post'>\n  </p>\n <p><input	type='submit'	value='Go to homepage'/></p>\n </form>");	
 				$connection	=	null;
 				?>
 		</body>

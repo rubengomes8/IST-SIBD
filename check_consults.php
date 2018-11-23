@@ -33,42 +33,41 @@ $show_animal_consults_query = $connection->prepare("SELECT c.name as aname, c.VA
 
 
 	//echo("<p>$num records retrieved:</p>\n");
-	
-	echo("<table border=\"1\">\n");
-	echo("<tr><td>animal</td><td>vat</td><td>date</td></tr>\n");
-	foreach($show_animal_consults_query as $row)
-	{
-		echo("<tr><td>");
-		echo($row["aname"]);
-		echo("</td><td>");
-		echo($row["vatt"]);
-		echo("</td><td>");
-		echo($row["date"]);
-		//add link href
-		echo("<td> <a	href=\"consult_info.php?aname=");
-		echo($row['aname']);
-		echo("&vat=");
-		echo($row['vatt']);
-		echo("&date=");
-		echo($row['date']);
-		echo("\">Consult info</a></td>\n");
-		echo("<td> <a	href=\"enter_results.php?aname=");
-		echo($row['aname']);
-		echo("&vat=");
-		echo($row['vatt']);
-		echo("&date=");
-		echo($row['date']);
-		echo("\">enter results</a></td>\n");
-		echo("</tr>\n");
+	if($num >= 1){
+		echo("<table border=\"1\">\n");
+		echo("<tr><td>animal</td><td>vat</td><td>date</td></tr>\n");
+		foreach($show_animal_consults_query as $row)
+		{
+			echo("<tr><td>");
+			echo($row["aname"]);
+			echo("</td><td>");
+			echo($row["vatt"]);
+			echo("</td><td>");
+			echo($row["date"]);
+			//add link href
+			echo("<td> <a	href=\"consult_info.php?aname=");
+			echo($row['aname']);
+			echo("&vat=");
+			echo($row['vatt']);
+			echo("&date=");
+			echo($row['date']);
+			echo("\">Consult info</a></td>\n");
+			echo("<td> <a	href=\"enter_results.php?aname=");
+			echo($row['aname']);
+			echo("&vat=");
+			echo($row['vatt']);
+			echo("&date=");
+			echo($row['date']);
+			echo("\">enter results</a></td>\n");
+			echo("</tr>\n");
+		}
+		echo("</table>\n");
 	}
-	echo("</table>\n");
 
-	$animal_name = $row['aname'];
-	$animal_vat = $row['vatt'];
 
 	//passar parametros atraves do formulario --> não está a passar corretamente
-	echo("<form	action='addconsult.php?aname=$animal_name&vat=$animal_vat'	method='post'>\n <h2>Add a new consult to the database for ($aname, $vat)</h2> <h3>Consult information</h3>\n<p>date(YYYY-MM-DD hh:mm:ss):	<input	type='text'	name='date'/></p> <p>s:	<input	type='text'	name='s'/></p>\n <p>o:	<input	type='text'	name='o'/></p>\n<p>a:	<input	type='text'	name='aa'/></p><p>p:	<input	type='text'	name='p'/></p> ");
-	echo("\n<p>client VAT:	<input	type='text'	name='VAT_client'/></p> <p>veterinary VET:	<input	type='text'	name='VAT_vet'/></p>\n <p>weight:	<input	type='text'	name='weight'/></p>\n<p>diagnostic code:	<input	type='text'	name='code'/></p><p><input	type='submit'	value='Add new consult'/></p>\n  </form>");
+	echo("<form	action='addconsult.php?aname=$aname&vat=$vat'	method='post'>\n <h3>Add a new consult to the database for ($aname, $vat)</h3> <h3>Consult information</h3>\n<p>date(YYYY-MM-DD hh:mm:ss):	<input	type='text'	name='date'/></p> <p>s:	<input	type='text'	name='s'/></p>\n <p>o:	<input	type='text'	name='o'/></p>\n<p>a:	<input	type='text'	name='aa'/></p><p>p:	<input	type='text'	name='p'/></p> ");
+	echo("\n<p>veterinary VET:	<input	type='text'	name='VAT_vet'/></p>\n <p>weight:	<input	type='text'	name='weight'/></p>\n<p>diagnostic code:	<input	type='text'	name='code'/></p><p><input	type='submit'	value='Add new consult'/></p>\n  </form>");
 $connection	=	null;
 ?>
 </body>
