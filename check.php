@@ -34,7 +34,7 @@
 			//echo("<p>$num_c clients retrieved:</p>\n");
 
 
-			$check_animal_query = $connection->prepare("SELECT a.name as aname, p.name as pname, p.VAT as vat FROM animal a, client c, person p WHERE a.VAT = c.VAT and c.VAT = p.VAT and a.name = :animal_name and a.VAT = :animal_vat and p.name like :owner_name and exists (SELECT * FROM consult c WHERE c.VAT_client = :vat and c.name = a.name and c.VAT_owner = p.VAT) ");
+			$check_animal_query = $connection->prepare("SELECT a.name as aname, p.name as pname, p.VAT as vat, a.species_name as specie, a.gender as gd, a.age as ag FROM animal a, client c, person p WHERE a.VAT = c.VAT and c.VAT = p.VAT and a.name = :animal_name and a.VAT = :animal_vat and p.name like :owner_name and exists (SELECT * FROM consult c WHERE c.VAT_client = :vat and c.name = a.name and c.VAT_owner = p.VAT) ");
 			
 			//$check_animal_query->debugDumpParams();
 
@@ -53,7 +53,7 @@
 			//if $num >= 1
 			if($num >= 1){
 				echo("<table border=\"1\">\n");
-				echo("<tr><td>animal</td><td>person</td><td>vat</td></tr>\n");
+				echo("<tr><td>animal</td><td>person</td><td>vat</td><td>specie</td><td>gender</td><td>age</td></tr>\n");
 				foreach($check_animal_query as $row)
 				{
 					echo("<tr><td>");
@@ -62,6 +62,12 @@
 					echo($row["pname"]);
 					echo("</td><td>");
 					echo($row["vat"]);
+					echo("</td><td>");
+					echo($row["specie"]);
+					echo("</td><td>");
+					echo($row["gd"]);
+					echo("</td><td>");
+					echo($row["ag"]);
 					echo("</td><td>");
 					echo("<a	href=\"check_consults.php?aname=");
 					echo($row['aname']);

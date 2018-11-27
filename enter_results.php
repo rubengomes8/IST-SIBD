@@ -24,11 +24,20 @@ $vat	=	$_GET['vat'];
 $date	=	$_GET['date'];
 //echo("<p> $date</p>\n");
 
-
+$sql = "SELECT VAT from assistant";
+$result = $connection->query($sql);
 
 //Enter results of a blood test 
 //VAT_assistant, values of indicators: white blood cell count, number of neutrophils, number of lymphocites, number of monocytes
-echo("<form	action='addresults.php?aname=$aname&vat=$vat&date=$date'	method='post'>\n <h2>Enter results</h2> \n<p>number of neutrophils:	<input	type='text'	name='neutrophils'/></p> <p>number of lymphocits:	<input	type='text'	name='lymphocits'/></p>\n <p>number of monocytes:	<input	type='text'	name='monocytes'/></p>\n<p>number of white blood cells:	<input	type='text'	name='white_blood_cell'/></p>\n<p>assistant VAT:	<input	type='text'	name='VAT_assistant'/></p>\n<p>num:	<input	type='text'	name='num'/></p>\n<p><input	type='submit'	value='Enter results'/></p>\n  </form>");
+echo("<form	action='addresults.php?aname=$aname&vat=$vat&date=$date'	method='post'>\n <h2>Enter results</h2> \n<p>number of neutrophils:	<input	type='text'	name='neutrophils'/></p> <p>number of lymphocits:	<input	type='text'	name='lymphocits'/></p>\n <p>number of monocytes:	<input	type='text'	name='monocytes'/></p>\n<p>number of white blood cells:	<input	type='text'	name='white_blood_cell'/></p>\n<p>assistant VAT:	<select	name='VAT_assistant'>");
+
+foreach($result	as	$row)
+	{
+		$VAT_assistant	=	$row['VAT'];
+		echo("<option	value=\"$VAT_assistant\">$VAT_assistant</option>");
+	}
+
+echo("</select></p>\n<p>num:	<input	type='text'	name='num'/></p>\n<p><input	type='submit'	value='Enter results'/></p>\n  </form>");
 
 		
 $connection	=	null;

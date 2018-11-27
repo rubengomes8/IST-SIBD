@@ -64,10 +64,24 @@ $show_animal_consults_query = $connection->prepare("SELECT c.name as aname, c.VA
 		echo("</table>\n");
 	}
 
+	$sql = "SELECT VAT from veterinary;";
+	$result = $connection->query($sql);
 
+	echo("<h3>Check the existence of another animal</h3>");
+	echo("<form	action='checkanimal.php'	method='post'>\n  </p>\n <p><input	type='submit'	value='Go to homepage'/></p>\n </form>");
 	//passar parametros atraves do formulario --> não está a passar corretamente
 	echo("<form	action='addconsult.php?aname=$aname&vat=$vat'	method='post'>\n <h3>Add a new consult to the database for ($aname, $vat)</h3> <h3>Consult information</h3>\n<p>date(YYYY-MM-DD hh:mm:ss):	<input	type='text'	name='date'/></p> <p>s:	<input	type='text'	name='s'/></p>\n <p>o:	<input	type='text'	name='o'/></p>\n<p>a:	<input	type='text'	name='aa'/></p><p>p:	<input	type='text'	name='p'/></p> ");
-	echo("\n<p>veterinary VET:	<input	type='text'	name='VAT_vet'/></p>\n <p>weight:	<input	type='text'	name='weight'/></p>\n<p>diagnostic code:	<input	type='text'	name='code'/></p><p><input	type='submit'	value='Add new consult'/></p>\n  </form>");
+	echo("\n<p>veterinary VET:	<select	name='VAT_vet'>"); 
+
+	foreach($result	as	$row)
+	{
+		$VAT_vet	=	$row['VAT'];
+		echo("<option	value=\"$VAT_vet\">$VAT_vet</option>");
+	}
+
+	echo("</select></p>\n <p>weight:	<input	type='text'	name='weight'/></p>\n<p>diagnostic code:	<input	type='text'	name='code'/></p><p><input	type='submit'	value='Add new consult'/></p>\n  </form>");
+
+
 $connection	=	null;
 ?>
 </body>

@@ -137,6 +137,9 @@
 				echo("<h3>Results entered successfully!</h3>");
 
 
+				echo("<h3>Check the consults</h3>");
+				echo("<form	action='check_consults.php?aname=$aname&vat=$vat'	method='post'>\n  </p>\n <p><input	type='submit'	value='Check consults'/></p>\n </form>");
+
 				echo("<h3>Check the existence of another animal</h3>");
 				echo("<form	action='checkanimal.php'	method='post'>\n  </p>\n <p><input	type='submit'	value='Go to homepage'/></p>\n </form>");	
 				$connection	=	null;
