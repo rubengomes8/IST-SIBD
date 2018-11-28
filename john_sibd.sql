@@ -141,22 +141,16 @@ delimiter //
 create procedure ref_values()
 begin
 
-update produced_indicator pi
-set pi.value = pi.value / 10
-where pi.indicator_name in (
-select i.name from indicator i
-where i.units = 'milligrams');
-
-
 update indicator i
-set i.reference_value = i.reference.value / 10, i.units = 'centigrams'
+set i.reference_value = i.reference_value / 10, i.units = 'centigrams'
 where i.units = 'milligrams';
 
 end
 //
 delimiter ;
 
-
+-- Invoke this procedure
+call ref_values();
 
 
 
