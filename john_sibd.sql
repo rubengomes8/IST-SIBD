@@ -149,7 +149,7 @@ end
 //
 delimiter ;
 
--- Invoke this procedure
+-- Invoke this procedure-
 call ref_values();
 
 
