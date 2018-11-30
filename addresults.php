@@ -37,6 +37,7 @@
 
 
 				//---------------------------------
+				try{
 				$connection->beginTransaction();
 
 				$add_participation = $connection->prepare("INSERT Into participation values (:aname, :vat, :datee, :VAT_assistant)");
@@ -135,7 +136,10 @@
 				$connection->commit();
 
 				echo("<h3>Results entered successfully!</h3>");
-
+			} catch(Exception $e){
+				echo $e->getMessage();
+				$connection->rollBack();
+			}
 
 				echo("<h3>Check the consults</h3>");
 				echo("<form	action='check_consults.php?aname=$aname&vat=$vat'	method='post'>\n  </p>\n <p><input	type='submit'	value='Check consults'/></p>\n </form>");
