@@ -41,7 +41,7 @@
 
 		echo("<p>$num_animals animals with the same VAT(owner) and name</p>\n");
 
-		$check_animal_query = $connection->prepare("SELECT a.name as aname, p.name as pname, p.VAT as vat, a.species_name as specie, a.gender as gd, a.age as ag FROM animal a, client c, person p WHERE a.VAT = p.VAT and aname = :animal_name and p.name like :owner_name and exists (SELECT * FROM consult c1 WHERE c1.VAT_client = :vat and c1.name = a.name and c1.VAT_owner = p.VAT) ");
+		$check_animal_query = $connection->prepare("SELECT distinct a.name as aname, p.name as pname, p.VAT as vat, a.species_name as specie, a.gender as gd, a.age as ag FROM animal a, client c, person p WHERE a.VAT = p.VAT and a.name = :animal_name and p.name like :owner_name and exists (SELECT * FROM consult c1 WHERE c1.VAT_client = :vat and c1.name = a.name and c1.VAT_owner = p.VAT) ");
 
 		//$check_animal_query->debugDumpParams();
 
