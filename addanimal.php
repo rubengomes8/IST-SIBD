@@ -64,11 +64,10 @@
 				} else {
 					echo("<h3> This animal is already in the database</h3>");
 
-					echo("<p> Check consults of this animal</p>");
-
-					echo("<form	action='check_consults.php?aname=$animal_name&vat=$animal_vat'	method='post'>\n  </p>\n <p><input	type='submit'	value='Check consults'/></p>\n </form>");
 				}
-
+				
+				echo("<p> Check consults of this animal</p>");
+				echo("<form	action='check_consults.php?aname=$animal_name&vat=$animal_vat'	method='post'>\n  </p>\n <p><input	type='submit'	value='Check consults'/></p>\n </form>");
 					
 				echo("<h3>Check the existence of another animal</h3>");
 				echo("<form	action='checkanimal.php'	method='post'>\n  </p>\n <p><input	type='submit'	value='Go to homepage'/></p>\n </form>");
