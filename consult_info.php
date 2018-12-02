@@ -85,7 +85,9 @@ $num = $sqll->rowCount();
 		echo("</table>\n");
 
 		//
-		$sqlll = $connection->prepare("SELECT cd.code as cde , p.name_med as nm, p.lab as lb, p.dosage as dsg from consult_diagnosis cd, prescription p where cd.code = p.code and cd.name = p.name and cd.VAT_owner = p.VAT_owner and cd.date_timestamp = p.date_timestamp and cd.name = :aname and cd.VAT_owner = :vat and cd.date_timestamp = :date");
+		/*$sqlll = $connection->prepare("SELECT cd.code as cde , p.name_med as nm, p.lab as lb, p.dosage as dsg from consult_diagnosis cd, prescription p where cd.code = p.code and cd.name = p.name and cd.VAT_owner = p.VAT_owner and cd.date_timestamp = p.date_timestamp and cd.name = :aname and cd.VAT_owner = :vat and cd.date_timestamp = :date");*/
+
+		$sqlll = $connection->prepare("SELECT cd.code as cde from consult_diagnosis cd where cd.name = :aname and cd.VAT_owner = :vat and cd.date_timestamp = :date");
 
 		$sqlll->bindParam(':aname', $aname, PDO::PARAM_STR);
 
@@ -96,7 +98,7 @@ $num = $sqll->rowCount();
 		$sqlll->execute();
 
 		$num_d = $sqlll->rowCount();
-		//echo("num_diagnosiss: $num_d");
+		//echo("num_diagnosiss: $num_d\n");
 
 		if($num_d >= 1){
 
@@ -110,11 +112,44 @@ $num = $sqll->rowCount();
 
 			echo("<h3>Diagnosis</h3>");
 			echo("<table border=\"1\">\n");
-			echo("<tr><td>diagnosis</td><td>medication</td><td>lab</td><td>dosage</td></tr>\n");
+			echo("<tr><td>diagnosis</td></tr>\n");
 			foreach($sqlll as $row){
 				echo("<tr><td>");
 				echo($row["cde"]);
-				echo("</td><td>");
+				echo("</td>");
+				echo("</tr>\n");
+			}
+			echo("</table>\n");
+		
+		}
+
+		$sqllll = $connection->prepare("SELECT p.name_med as nm, p.lab as lb, p.dosage as dsg from prescription p where p.name = :aname and p.VAT_owner = :vat and p.date_timestamp = :date");
+		$sqllll->bindParam(':aname', $aname, PDO::PARAM_STR);
+
+		$sqllll->bindParam(':vat', $vat, PDO::PARAM_STR);
+
+		$sqllll->bindParam(':date', $date, PDO::PARAM_STR);
+
+		$sqllll->execute();
+
+		$num_pres = $sqllll->rowCount();
+		//echo("num_prescriptions: $num_pres\n");
+		
+		if($num_pres >= 1){
+
+			$sqllll->bindParam(':aname', $aname, PDO::PARAM_STR);
+
+			$sqllll->bindParam(':vat', $vat, PDO::PARAM_STR);
+
+			$sqllll->bindParam(':date', $date, PDO::PARAM_STR);
+
+			$sqllll->execute();
+
+			echo("<h3>Prescriptions</h3>");
+			echo("<table border=\"1\">\n");
+			echo("<tr><td>Medication</td><td>Lab</td><td>Dosage</td></tr>\n");
+			foreach($sqlll as $row){
+				echo("<tr><td>");
 				echo($row["nm"]);
 				echo("</td><td>");
 				echo($row["lb"]);
@@ -126,6 +161,8 @@ $num = $sqll->rowCount();
 			echo("</table>\n");
 		
 		}
+		
+
 		if($num_p >= 1){
 			$sql_results = $connection->prepare("SELECT indicator_name, value from produced_indicator where name = :aname and VAT_owner = :vat and date_timestamp = :date and num = :num");
 
