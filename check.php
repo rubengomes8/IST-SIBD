@@ -33,9 +33,9 @@
 
 		echo("<p>$num_c clients retrieved</p>\n");
 
-		$check_animal = $connection->prepare("SELECT * from animal where name = :aname and VAT = :vat");
+		$check_animal = $connection->prepare("SELECT * from animal a where a.name = :aname and a.VAT in (SELECT VAT from person p where p.name like :owner_name)");
 		$check_animal->bindValue(':aname', $animal_name);
-		$check_animal->bindValue(':vat', $animal_vat);
+		$check_animal->bindValue(':owner_name', "%{$owner_name}%");
 		$check_animal->execute();
 		$num_animals = $check_animal->rowCount();
 
