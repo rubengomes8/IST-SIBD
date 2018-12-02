@@ -51,7 +51,7 @@
 				
 				//--
 
-				$add_procedure = $connection->prepare("INSERT into procedure_ values (:aname, :vat,:datee, :num, 'Blood test')");
+				$add_procedure = $connection->prepare("INSERT into procedure_ values (:aname, :vat,:datee, :num, 'blood test')");
 
 				$add_procedure->bindParam(':aname', $aname, PDO::PARAM_STR);
 				$add_procedure->bindParam(':vat', $vat, PDO::PARAM_STR);
@@ -75,13 +75,13 @@
 				
 				//--
 
-				$add_testprocedure = $connection->prepare("INSERT into test_procedure values (:aname, :vat,:datee, :num, 'Blood')");
+				$add_testprocedure = $connection->prepare("INSERT into test_procedure values (:aname, :vat,:datee, :num, 'blood')");
 
 				$add_testprocedure->bindParam(':aname', $aname, PDO::PARAM_STR);
 				$add_testprocedure->bindParam(':vat', $vat, PDO::PARAM_STR);
 				$add_testprocedure->bindParam(':datee', $date, PDO::PARAM_STR);
-				$add_testprocedure->bindParam(':num', $num, PDO::PARAM_INT);
-				$add_testprocedure->bindParam(':VAT_assistant', $VAT_assistant, PDO::PARAM_STR);
+				$add_testprocedure->bindParam(':num', $num, PDO::PARAM_STR);
+				 
 
 				$add_testprocedure->execute();
 

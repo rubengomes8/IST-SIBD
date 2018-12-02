@@ -148,7 +148,7 @@ $num = $sqll->rowCount();
 			echo("<h3>Prescriptions</h3>");
 			echo("<table border=\"1\">\n");
 			echo("<tr><td>Medication</td><td>Lab</td><td>Dosage</td></tr>\n");
-			foreach($sqlll as $row){
+			foreach($sqllll as $row){
 				echo("<tr><td>");
 				echo($row["nm"]);
 				echo("</td><td>");
@@ -162,6 +162,15 @@ $num = $sqll->rowCount();
 		
 		}
 		
+		//print blood test result
+		$search_num = $connection->prepare("SELECT num from test_procedure where name = :aname and VAT_owner = :vat and date_timestamp = :date and type = 'blood'");
+
+		$search_num->bindParam(':aname', $aname, PDO::PARAM_STR);
+		$search_num->bindParam(':vat', $vat, PDO::PARAM_STR);
+		$search_num->bindParam(':date', $date, PDO::PARAM_STR);
+		$search_num->execute();
+		$num_p = $search_num->rowCount();
+		$numm = $search_num->fetchColumn();
 
 		if($num_p >= 1){
 			$sql_results = $connection->prepare("SELECT indicator_name, value from produced_indicator where name = :aname and VAT_owner = :vat and date_timestamp = :date and num = :num");
