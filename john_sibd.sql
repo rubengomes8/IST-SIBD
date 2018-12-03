@@ -34,7 +34,7 @@ BEGIN
 IF NEW.VAT IN (
 SELECT v.VAT FROM veterinary v)
 THEN SIGNAL SQLSTATE VALUE '45000'
-SET MESSAGE_TEXT = 'already vet insert';
+SET MESSAGE_TEXT = 'This veterinary already exist';
 END IF;
 END;
 //
@@ -48,7 +48,7 @@ BEGIN
 IF NEW.VAT IN (
 SELECT a.VAT FROM assistant a)
 THEN SIGNAL SQLSTATE VALUE '45000'
-SET MESSAGE_TEXT = 'already_assistant_insert';
+SET MESSAGE_TEXT = 'This assistant already exist';
 END IF;
 END;
 //
@@ -63,7 +63,7 @@ BEGIN
 IF NEW.VAT IN (
 SELECT a.VAT FROM assistant a)
 THEN SIGNAL SQLSTATE VALUE '45000'
-SET MESSAGE_TEXT = 'already_assistant_update';
+SET MESSAGE_TEXT = 'This assistant already exist';
 END IF;
 END;
 //
@@ -78,7 +78,7 @@ BEGIN
 IF NEW.VAT IN (
 SELECT v.VAT FROM veterinary v)
 THEN SIGNAL SQLSTATE VALUE '45000'
-SET MESSAGE_TEXT = 'already_veterinary_update';
+SET MESSAGE_TEXT = 'This veterinary already exist';
 END IF;
 END;
 //
@@ -95,7 +95,7 @@ BEGIN
 IF NEW.phone IN (
 SELECT pn.phone FROM phone_number pn)
 THEN SIGNAL SQLSTATE VALUE '45000'
-SET MESSAGE_TEXT = 'cell_n';
+SET MESSAGE_TEXT = 'This phone numbe already exist';
 END IF;
 END;
 //
@@ -108,7 +108,7 @@ BEGIN
 IF NEW.phone IN (
 SELECT pn.phone FROM phone_number pn)
 THEN SIGNAL SQLSTATE VALUE '45000'
-SET MESSAGE_TEXT = 'cell_n_update';
+SET MESSAGE_TEXT = 'This phone numbe already exist';
 END IF;
 END;
 //
@@ -159,19 +159,3 @@ where i.units = 'milligrams';
 end
 //
 delimiter ;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
